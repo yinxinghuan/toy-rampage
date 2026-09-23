@@ -274,7 +274,7 @@ function action(name){
  else if(name.startsWith('attempt-')){recordIndex=Number(name.slice(8));expandedWave=-1;}
  else if(name==='record-current'){recordIndex=-1;expandedWave=-1;}
  else if(name==='export'){
-   const data={build:pixel?'toy-rampage-alteru-20260923-r50':'toy-workshop-playtest-20260911-r8',skin:pixel?'pixel':'classic',appearance:{initial:initialAppearance,current:getAppearance(),changes:appearanceChanges},exportedAt:new Date().toISOString(),current:game.report(),attempts};
+   const data={build:pixel?'toy-rampage-alteru-20260923-r51':'toy-workshop-playtest-20260911-r8',skin:pixel?'pixel':'classic',appearance:{initial:initialAppearance,current:getAppearance(),changes:appearanceChanges},exportedAt:new Date().toISOString(),current:game.report(),attempts};
    const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='toy-workshop-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  }
  else if(name==='hint'){lastInteraction=-9999;guideStart=performance.now();notify('replayActive');}
