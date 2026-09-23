@@ -1,0 +1,236 @@
+{
+  "id": "spring-v1",
+  "status": "experimental",
+  "generator": "built-in image_gen; reference-guided eight-frame sprite sheet",
+  "sourceSha256": "26586232548f2c9e5f13e506a48b3120811ace503433b74f3737ccbeab09fa69",
+  "sourceSize": [
+    1222,
+    1287
+  ],
+  "frameSize": [
+    128,
+    320
+  ],
+  "logicalSize": [
+    128,
+    256
+  ],
+  "anchor": [
+    64,
+    316
+  ],
+  "scale": 0.5043478260869565,
+  "processing": "Edge-connected neutral background removal, shared nearest scale, bottom-center translation. No per-frame stretching, no base repainting.",
+  "idle": {
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "frameMs": 220
+  },
+  "fire": {
+    "frames": [
+      4,
+      5,
+      6,
+      0
+    ],
+    "frameMs": 100
+  },
+  "excludedFromPlayback": [
+    7
+  ],
+  "knownIssues": [
+    "Generated base star/screw details vary.",
+    "Generated last firing frame remains compressed; frame 0 is used for settle.",
+    "Reference fidelity and temporal style require user review."
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "file": "frame-0.png",
+      "sourceCrop": {
+        "left": 0,
+        "top": 0,
+        "width": 306,
+        "height": 584
+      },
+      "sourceBounds": {
+        "left": 42,
+        "top": 98,
+        "width": 225,
+        "height": 460
+      },
+      "drawBounds": [
+        8,
+        84,
+        113,
+        232
+      ],
+      "sha256": "80cad72199d6425781c4bc2b4bc449f8fa190997350429b945493fd3c33b1449"
+    },
+    {
+      "index": 1,
+      "file": "frame-1.png",
+      "sourceCrop": {
+        "left": 306,
+        "top": 0,
+        "width": 305,
+        "height": 584
+      },
+      "sourceBounds": {
+        "left": 42,
+        "top": 124,
+        "width": 230,
+        "height": 434
+      },
+      "drawBounds": [
+        6,
+        97,
+        116,
+        219
+      ],
+      "sha256": "fefc3578e218d2c00376c150cd22a4d92f21ff0bf96e942dbc75cf068a8923e3"
+    },
+    {
+      "index": 2,
+      "file": "frame-2.png",
+      "sourceCrop": {
+        "left": 611,
+        "top": 0,
+        "width": 306,
+        "height": 584
+      },
+      "sourceBounds": {
+        "left": 35,
+        "top": 76,
+        "width": 227,
+        "height": 482
+      },
+      "drawBounds": [
+        7,
+        73,
+        114,
+        243
+      ],
+      "sha256": "26cd92791186854b139229d5a9cb5df04d72bf7c4d93dc953a6e525a11941d07"
+    },
+    {
+      "index": 3,
+      "file": "frame-3.png",
+      "sourceCrop": {
+        "left": 917,
+        "top": 0,
+        "width": 305,
+        "height": 584
+      },
+      "sourceBounds": {
+        "left": 36,
+        "top": 98,
+        "width": 226,
+        "height": 460
+      },
+      "drawBounds": [
+        7,
+        84,
+        114,
+        232
+      ],
+      "sha256": "fb684ac554e1858b8df759611ccfb4783a3f2ddaca9ac794d93f5b986d0f85ab"
+    },
+    {
+      "index": 4,
+      "file": "frame-4.png",
+      "sourceCrop": {
+        "left": 0,
+        "top": 584,
+        "width": 306,
+        "height": 703
+      },
+      "sourceBounds": {
+        "left": 41,
+        "top": 219,
+        "width": 228,
+        "height": 416
+      },
+      "drawBounds": [
+        7,
+        106,
+        115,
+        210
+      ],
+      "sha256": "6cd4f363109d9506b3d7d6cc576fcd7e16a5d2d64b7e09fd232ae8c72f79e498"
+    },
+    {
+      "index": 5,
+      "file": "frame-5.png",
+      "sourceCrop": {
+        "left": 306,
+        "top": 584,
+        "width": 305,
+        "height": 703
+      },
+      "sourceBounds": {
+        "left": 42,
+        "top": 31,
+        "width": 229,
+        "height": 604
+      },
+      "drawBounds": [
+        7,
+        11,
+        115,
+        305
+      ],
+      "sha256": "1fe840c3f8d682d9c3ac0082ef8a07379730192b2e88833bc780ba08565c94b2"
+    },
+    {
+      "index": 6,
+      "file": "frame-6.png",
+      "sourceCrop": {
+        "left": 611,
+        "top": 584,
+        "width": 306,
+        "height": 703
+      },
+      "sourceBounds": {
+        "left": 35,
+        "top": 188,
+        "width": 228,
+        "height": 447
+      },
+      "drawBounds": [
+        7,
+        91,
+        115,
+        225
+      ],
+      "sha256": "69d3ae5297ddb3c2e9c6198bf777a99720dc5616be6490c4466904c5a2f40b0f"
+    },
+    {
+      "index": 7,
+      "file": "frame-7.png",
+      "sourceCrop": {
+        "left": 917,
+        "top": 584,
+        "width": 305,
+        "height": 703
+      },
+      "sourceBounds": {
+        "left": 36,
+        "top": 175,
+        "width": 227,
+        "height": 460
+      },
+      "drawBounds": [
+        7,
+        84,
+        114,
+        232
+      ],
+      "sha256": "d63e0d78caca350ff5978466ab59f066ca791d9899bfb068a1ea4e80a0ff5ed8"
+    }
+  ]
+}

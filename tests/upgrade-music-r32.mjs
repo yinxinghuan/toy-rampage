@@ -1,0 +1,15 @@
+import {createRequire} from 'node:module';import fs from 'node:fs/promises';import assert from 'node:assert/strict';
+const {chromium}=createRequire('/Users/yin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json')('playwright');
+const base=process.env.QA_BASE||'http://127.0.0.1:5193/',out='_qa/upgrade-r32';await fs.mkdir(out,{recursive:true});const browser=await chromium.launch();
+try{const ctx=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true}),p=await ctx.newPage(),errors=[],requests=[];p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.url().includes('/audio/'))requests.push(r.url());});
+ await p.addInitScript(()=>{window.__musicStarts=[];window.__decoded=[];const Original=window.AudioContext;window.AudioContext=class extends Original{constructor(...a){super(...a);const decode=this.decodeAudioData.bind(this);this.decodeAudioData=async b=>{const result=await decode(b);__decoded.push(result.duration);return result;};const create=this.createBufferSource.bind(this);this.createBufferSource=()=>{const source=create(),start=source.start.bind(source);source.start=(...a)=>{__musicStarts.push(source.buffer?.duration);return start(...a);};return source;};}};});
+ await p.clock.install();await p.goto(base+'?lang=zh');await p.locator('.tw[data-renderer=pixel]').waitFor({timeout:60000});const step=ms=>p.clock.runFor(ms),act=async a=>{await p.locator(`[data-action="${a}"]`).tap();await step(50);};
+ await p.locator('[data-audio-toggle]').tap();await p.locator('[data-source=tray]').tap();await p.waitForFunction(()=>__decoded.some(d=>Math.abs(d-1.8)<.01));await p.locator('[data-cell="0,0"]').tap();await step(5000);
+ await p.locator('[data-source=tray]').tap();await p.locator('[data-cell="0,0"]').tap();await step(100);
+ await p.locator('[data-source=land]').tap();await p.locator('[data-cell="0,3"]').tap();await step(100);
+ await p.locator('[data-source=tray]').tap();await p.locator('[data-cell="0,2"]').tap();await step(100);await act('main');
+ let found=false;for(let i=0;i<50;i++){await step(500);if(await p.locator('[data-action=upgrade-0]').isVisible()){found=true;break;}}
+ assert(found,'real upgrade popup must appear');await p.waitForTimeout(150);await step(100);assert.equal(await p.evaluate(()=>__musicStarts.filter(d=>Math.abs(d-1.8)<.01).length),1);await step(400);assert.equal(await p.evaluate(()=>__musicStarts.filter(d=>Math.abs(d-1.8)<.01).length),1);
+ await p.screenshot({path:out+'/390-upgrade-popup.png'});await act('upgrade-0');assert(!(await p.locator('[data-action=upgrade-0]').isVisible()));assert(!requests.some(u=>u.includes('music-r17/upgrade.mp3')));assert.deepEqual(errors,[]);
+ await fs.writeFile(out+'/checks.json',JSON.stringify({requests,started:await p.evaluate(()=>__musicStarts),errors},null,2));await ctx.close();
+}finally{await browser.close();}console.log('PASS actual upgrade popup plays new 1.8s music once; old popup track not fetched; equipment interaction unchanged');

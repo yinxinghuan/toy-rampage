@@ -1,0 +1,76 @@
+{
+  "version": "dialog-cast-v1",
+  "method": "Built-in imagegen: four additional protagonists using the approved r13 tinkerer as style reference only. Native alpha preserved; user-authorized neutral checker cleanup for opaque outputs. Nearest resize and 8px clear margin.",
+  "sources": {
+    "win-bubble": "exec-ae208ff1-c8c0-4308-ab2c-1a892435844a.png",
+    "win-rail": "exec-163820d5-4788-4ad1-92bc-ca99da1d4e59.png",
+    "lose-drum": "exec-2470439c-3956-44a9-bd33-7213ed0b42a9.png",
+    "lose-scout": "exec-35277efc-6e80-4b3b-9764-a6d14683a1ab.png"
+  },
+  "assets": [
+    {
+      "name": "win-bubble",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        279,
+        12,
+        1160,
+        856
+      ],
+      "transparentFraction": 0.6669123974127095,
+      "sha256": "dc00e4ea6b9543c9d9eed40015a9e701aa3ae985f441846e85261ec52921d994"
+    },
+    {
+      "name": "win-rail",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        82,
+        11,
+        1618,
+        861
+      ],
+      "transparentFraction": 0.5728047241312253,
+      "sha256": "fb3513c36df792c4f92a490925d148a2342513984498e4fdb902d1dd553b083c"
+    },
+    {
+      "name": "lose-drum",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        185,
+        21,
+        1403,
+        837
+      ],
+      "transparentFraction": 0.5432878011207865,
+      "sha256": "d2af028b37da0429e8bf9b91eb49140fd4897179d85e5ad2794dd0fd69c87de8"
+    },
+    {
+      "name": "lose-scout",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        327,
+        16,
+        1247,
+        833
+      ],
+      "transparentFraction": 0.6560635968117706,
+      "sha256": "1e263c5a09c22a127813ef91b54c6255251c474867b8daf9f550c86f864af023"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import assert from 'node:assert/strict';
+const version=process.env.QA_VERSION||'r20',run=promisify(execFile),base='https://game.aiwaves.tech/0b7bc17b-d66e-4b51-9b7d-5a5c178dc4ae/';
+const files=['index.html','pixel-lab/index.html','build-info.json','review-build.json','THIRD_PARTY_NOTICES.txt','animation/spring-v1/frame-0.png',...(version!=='r20'?['image-compression.json']:[]),...(await fs.readdir('dist/assets')).filter(p=>/\.(js|css)$/.test(p)||p.startsWith('workshop-environment')||/^(assembly|foundry|power)-.*\.webp$/.test(p)||/^(land-tray|gold-blank|lilac-blank|pause|start-zh|start-en)-/.test(p)).map(p=>'assets/'+p)];
+files.push(...['workshop','patrol','win','lose','upgrade'].map(id=>'audio/music-r17/'+id+'.mp3'));
+if(Number(version.slice(1))>=32)files.push('audio/music-r32/upgrade.wav','audio/music-r32/manifest.json');
+const get=async path=>(await run('curl',['-fsS','--connect-timeout','10','--max-time',process.env.QA_FETCH_TIMEOUT||'40',new URL(path+'?verify='+version+'-playable',base).href],{encoding:'buffer',maxBuffer:10*1024*1024})).stdout;
+const sha=b=>createHash('sha256').update(b).digest('hex'),results=[];let cursor=0;
+await Promise.all(Array.from({length:4},async()=>{while(cursor<files.length){const path=files[cursor++],remote=await get(path),local=await fs.readFile('dist/'+path);assert.equal(sha(remote),sha(local),path);results.push({path,bytes:remote.length,sha:sha(remote)});}}));
+const expected=JSON.parse(await fs.readFile('dist/build-info.json','utf8'));
+assert(expected.build.endsWith('-'+version));
+const health=JSON.parse(await get('api/health'));assert.equal(health.build,expected.build);assert.equal(health.persistence,expected.persistence);
+await fs.mkdir('_qa/release-'+version,{recursive:true});await fs.writeFile('_qa/release-'+version+'/live-sha.json',JSON.stringify({base,health,verifiedAt:new Date().toISOString(),files:results},null,2));console.log('PASS',results.length,'live files match local build, health',version);

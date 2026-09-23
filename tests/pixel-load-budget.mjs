@@ -1,0 +1,5 @@
+import {createRequire} from 'node:module';
+import fs from 'node:fs/promises';
+const {chromium}=createRequire('/Users/yin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json')('playwright');
+const base=process.env.QA_BASE||'http://127.0.0.1:5194/',out=process.env.QA_OUT||'_qa/preload-r21';await fs.mkdir(out,{recursive:true});
+const browser=await chromium.launch();try{const p=await browser.newPage({viewport:{width:390,height:844}});const started=Date.now();await p.goto(base+'?lang=zh',{waitUntil:'domcontentloaded',timeout:120000});await p.locator('.tw[data-renderer=pixel]').waitFor({timeout:120000});const ready=Date.now()-started;await p.waitForLoadState('networkidle',{timeout:120000});const resources=await p.evaluate(()=>performance.getEntriesByType('resource').map(r=>({url:r.name,bytes:r.encodedBodySize,decoded:r.decodedBodySize,duration:r.duration})));const report={base,readyMs:ready,requests:resources.length,encodedBytes:resources.reduce((n,r)=>n+r.bytes,0),resources};await fs.writeFile(out+'/budget.json',JSON.stringify(report,null,2));console.log(JSON.stringify({...report,resources:undefined}));}finally{await browser.close();}

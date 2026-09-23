@@ -1,0 +1,11 @@
+{
+  "source": "Original deterministic PCM composition",
+  "script": "scripts/create-upgrade-r32.mjs",
+  "duration": 1.8,
+  "sampleRate": 44100,
+  "channels": 2,
+  "peakDb": -17.009584703227848,
+  "rmsDb": -28.81438578855338,
+  "description": "Upgrade popup music: soft five-note celesta phrase over a restrained major chord; no mechanical clicks, vocals, bass hit or long reverb. Equipment upgrade SFX unchanged.",
+  "humanListening": "pending user audition"
+}

@@ -1,0 +1,14 @@
+{
+  "source": "_production/pixel-r24/land-tray-original.png",
+  "generator": "Built-in image_gen; existing r3 tray as reference/edit target",
+  "processing": "Authorized edge-connected neutral checker removal; alpha bounds crop, nearest resize to existing 545x176 tray footprint with 2px transparent margin. Original preserved.",
+  "crop": {
+    "left": 13,
+    "top": 28,
+    "width": 2139,
+    "height": 653
+  },
+  "removed": 218323,
+  "sourceSha256": "7fde7ddb88106cffd6e488bf79ebadca301170643c3bf2f6b33e92995bae5bfa",
+  "sha256": "27aebc46d91ef282b3c2a0c9e7ef8802479edb7d1f78ac1447fed65bccad241f"
+}

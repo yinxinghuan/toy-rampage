@@ -1,0 +1,279 @@
+{
+  "id": "mortar",
+  "status": "directional-art-trial",
+  "directions": [
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE"
+  ],
+  "size": [
+    256,
+    320
+  ],
+  "logical": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    232
+  ],
+  "baseScale": 0.65,
+  "headScale": 0.61,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceSha256": "85ba63ef059854d648d12a7e536a373a1782bfb53416cc5458ad0259fe251ba2",
+  "processing": "Magenta chroma key; nearest-neighbor resize with one scale for all eight heads; fixed base and calibrated pivot; no per-frame rotation or skeleton.",
+  "parts": [
+    {
+      "file": "base.png",
+      "sourceCrop": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        48,
+        162,
+        339,
+        189
+      ],
+      "sourcePivot": [
+        217,
+        342
+      ],
+      "scale": 0.65,
+      "drawBounds": [
+        18,
+        193,
+        220,
+        123
+      ],
+      "sha256": "0baa708f6c3fd3797f6876168ce3e1bad39a301171d4d97aeb7f19bd7e974317"
+    },
+    {
+      "file": "head-0.png",
+      "sourceCrop": [
+        418,
+        0,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        24,
+        70,
+        342,
+        290
+      ],
+      "sourcePivot": [
+        158.95129615082482,
+        351
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        46,
+        61,
+        209,
+        177
+      ],
+      "sha256": "b781a9a502a824d6b5f9f2a3c878c618a0d0bd476a0bb445d97ef9fbda14e166"
+    },
+    {
+      "file": "head-1.png",
+      "sourceCrop": [
+        836,
+        0,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        23,
+        81,
+        346,
+        274
+      ],
+      "sourcePivot": [
+        208.3169897377423,
+        346
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        15,
+        70,
+        211,
+        167
+      ],
+      "sha256": "585f60b2c4f54f6bd867be9614cc88f904064a4fe06bf72cbb9244fb8c98ea12"
+    },
+    {
+      "file": "head-2.png",
+      "sourceCrop": [
+        0,
+        418,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        59,
+        44,
+        324,
+        292
+      ],
+      "sourcePivot": [
+        227.2460732984293,
+        327
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        25,
+        59,
+        198,
+        178
+      ],
+      "sha256": "df90a6d820e105c5203861ed9f93323c93e2808adcbee7f549e98dc0fbc27449"
+    },
+    {
+      "file": "head-3.png",
+      "sourceCrop": [
+        418,
+        418,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        39,
+        57,
+        345,
+        279
+      ],
+      "sourcePivot": [
+        194.73549107142858,
+        327
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        33,
+        67,
+        210,
+        170
+      ],
+      "sha256": "9d2da7cef9b77d01da36e38d0749f99b3b8d2c1656a3a2f9ee3699bbd92a2dc7"
+    },
+    {
+      "file": "head-4.png",
+      "sourceCrop": [
+        836,
+        418,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        44,
+        54,
+        331,
+        282
+      ],
+      "sourcePivot": [
+        231.67866786678667,
+        327
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        14,
+        65,
+        202,
+        172
+      ],
+      "sha256": "887df256a5b1b028d9bbdc88647573fc214aa5502d81a512e2879e47cf6cf391"
+    },
+    {
+      "file": "head-5.png",
+      "sourceCrop": [
+        0,
+        836,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        53,
+        20,
+        334,
+        298
+      ],
+      "sourcePivot": [
+        235.28560431100846,
+        309
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        17,
+        56,
+        204,
+        182
+      ],
+      "sha256": "34ee1fdb645296c37e4dbf6badb827357809c237cb5bafc677e6340bc8fbfadc"
+    },
+    {
+      "file": "head-6.png",
+      "sourceCrop": [
+        418,
+        836,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        60,
+        20,
+        323,
+        298
+      ],
+      "sourcePivot": [
+        235.93248945147678,
+        309
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        21,
+        56,
+        197,
+        182
+      ],
+      "sha256": "339dbd32412d69c35dfafc82ce9634b9322845ed3ac70662b3a3f554562407df"
+    },
+    {
+      "file": "head-7.png",
+      "sourceCrop": [
+        836,
+        836,
+        418,
+        418
+      ],
+      "sourceBounds": [
+        24,
+        20,
+        335,
+        298
+      ],
+      "sourcePivot": [
+        171.92754716981133,
+        309
+      ],
+      "scale": 0.61,
+      "drawBounds": [
+        38,
+        56,
+        204,
+        182
+      ],
+      "sha256": "6a4a729e7f1767c3beb0410bf578964236e2a6d4ee17c1db93686afb1aee6304"
+    }
+  ]
+}

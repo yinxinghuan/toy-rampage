@@ -1,0 +1,47 @@
+{
+  "version": "dialog-titles-v2",
+  "source": "../dialog-v1/",
+  "method": "Four-pass connected light-matte edge cleanup; dark-purple outline barrier; retained RGB and alpha unchanged.",
+  "assets": [
+    {
+      "file": "title-win-zh.png",
+      "removedMattePixels": 683,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-win-en.png",
+      "removedMattePixels": 625,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-lose-zh.png",
+      "removedMattePixels": 579,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-lose-en.png",
+      "removedMattePixels": 661,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-upgrade-zh.png",
+      "removedMattePixels": 715,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-upgrade-en.png",
+      "removedMattePixels": 705,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-pause-zh.png",
+      "removedMattePixels": 551,
+      "retainedChanged": 0
+    },
+    {
+      "file": "title-pause-en.png",
+      "removedMattePixels": 678,
+      "retainedChanged": 0
+    }
+  ]
+}

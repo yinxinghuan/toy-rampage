@@ -1,0 +1,115 @@
+{
+  "type": "enemy",
+  "id": "runner",
+  "size": [
+    96,
+    96
+  ],
+  "count": 6,
+  "scale": 0.24022346368715083,
+  "source": "/Users/yin/.codex/generated_images/01a05c25-1216-7f62-a689-914a82db1253/exec-234d89da-5bf9-4507-9f68-38bf6d62d9e4.png",
+  "sourceSize": [
+    1536,
+    1024
+  ],
+  "sourceSha256": "3d71acbf00f9db8f8e4ddf006229ddf6cc340b3bedb2701fce0d5e5a1579e4d3",
+  "processing": "Native alpha preserved, magenta keyed only if alpha missing; fixed cell VFX/attachments, common scale and feet alignment for enemy poses; nearest resize.",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "sourceCrop": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        93,
+        348,
+        358
+      ],
+      "sha256": "0bc8ac15d517f66f22dac3686199a0624f6c084b82dc1a4fc32d53914f00c3ab"
+    },
+    {
+      "file": "frame-1.png",
+      "sourceCrop": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        93,
+        312,
+        358
+      ],
+      "sha256": "8b587f3f4d79f406253769a9e49ce222e06973eaacb1cdfdf4b4c0bea9060af7"
+    },
+    {
+      "file": "frame-2.png",
+      "sourceCrop": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        93,
+        323,
+        358
+      ],
+      "sha256": "0f3bd9e2bb64b183a52ef1dfa7069d3fa5d836879460a98a877c0700ae651ff1"
+    },
+    {
+      "file": "frame-3.png",
+      "sourceCrop": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        94,
+        348,
+        357
+      ],
+      "sha256": "cdcfe93d7f4a6955b31b7ed86de0e9fe84ddea644884fa258f28c867a558bf01"
+    },
+    {
+      "file": "frame-4.png",
+      "sourceCrop": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        94,
+        312,
+        357
+      ],
+      "sha256": "3c5d43e2bb25115fba4cf517ac0db15405716d771a8272e1bad7a87b7237d53e"
+    },
+    {
+      "file": "frame-5.png",
+      "sourceCrop": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "opaqueBounds": [
+        103,
+        94,
+        336,
+        357
+      ],
+      "sha256": "b5e823b87630351676b224f1e23748dbcd8bc21799b7dea31c2f5a07bf4a449e"
+    }
+  ]
+}

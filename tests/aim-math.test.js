@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {delta,turnToward,directionFrame,bearing,routeTarget} from '../src/pixel/aim-math.js';
+test('all eight directions match target bearings',()=>{for(let i=0;i<8;i++){const a=i*Math.PI/4;assert.equal(directionFrame(bearing({x:0,y:0},{x:Math.cos(a),y:Math.sin(a)})),i);}});
+test('turn uses shortest arc, respects speed and does not overshoot',()=>{const a=179*Math.PI/180,b=-179*Math.PI/180;assert(Math.abs(delta(turnToward(a,b,.1),b))<1e-9);assert(Math.abs(turnToward(0,Math.PI/2,.1)-Math.PI*.1)<1e-9);assert.equal(turnToward(0,1,-2),0);});
+test('sector hysteresis resists boundary noise',()=>{assert.equal(directionFrame(24*Math.PI/180,0),0);assert.equal(directionFrame(28*Math.PI/180,0),1);assert.equal(directionFrame(22*Math.PI/180,1),1);assert.equal(directionFrame(16*Math.PI/180,1),0);});
+test('looping test route stays on the perimeter',()=>{for(let t=0;t<3;t+=.013){const p=routeTarget(t);assert(p.x>=.119&&p.x<=.926&&p.y>=.046&&p.y<=.946);assert(Math.abs(p.y-.047)<1e-5||Math.abs(p.x-.925)<1e-5||Math.abs(p.y-.945)<1e-5);}});

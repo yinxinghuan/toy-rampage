@@ -1,0 +1,10 @@
+{
+  "game": "toy-workshop",
+  "build": "toy-rampage-alteru-20260923-r50",
+  "music": "r17-five-candidates-integrated-gesture-unlock-crossfade-r31",
+  "skin": "pixel",
+  "uuid": "03855703-d241-4f8c-90a9-ccf0bb72972e",
+  "mode": "alteru-release",
+  "persistence": "local-browser",
+  "payments": false
+}

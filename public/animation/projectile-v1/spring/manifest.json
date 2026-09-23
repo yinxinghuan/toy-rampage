@@ -1,0 +1,84 @@
+{
+  "id": "spring",
+  "size": [
+    64,
+    64
+  ],
+  "grid": [
+    2,
+    2
+  ],
+  "scale": 0.1834862385321101,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceSha256": "2814ccabe0927c2660ad48ea70df4e01a04653eca0bd7bab5a89c99b8b0e3616",
+  "method": "Native alpha; equal source cells; all four frames share one nearest scale, recentered to common pivot without per-frame resizing",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        252,
+        263,
+        217,
+        216
+      ],
+      "sha256": "f8a13842ea823e006ca30ddfe1bc9ca980b890d757e62e4372f2ca5c027d9633"
+    },
+    {
+      "file": "frame-1.png",
+      "crop": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        158,
+        263,
+        218,
+        217
+      ],
+      "sha256": "9895ab89890e9b1ae1873071034d899f7eaccd706fbd96966e4d7d7960780507"
+    },
+    {
+      "file": "frame-2.png",
+      "crop": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        252,
+        144,
+        217,
+        217
+      ],
+      "sha256": "b42581b8f2876f9e56455752c710db7ebe87f2171c1d6c9eb0d28f1a08f6e789"
+    },
+    {
+      "file": "frame-3.png",
+      "crop": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        158,
+        144,
+        218,
+        217
+      ],
+      "sha256": "1ae88016a344b0e03a980f29d699511294441deed31f4d8c068e1855ee435e79"
+    }
+  ]
+}

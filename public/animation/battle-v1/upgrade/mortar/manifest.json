@@ -1,0 +1,67 @@
+{
+  "type": "upgrade",
+  "id": "mortar",
+  "size": [
+    256,
+    256
+  ],
+  "count": 3,
+  "scale": null,
+  "source": "/Users/yin/.codex/generated_images/01a05c25-1216-7f62-a689-914a82db1253/exec-c54aeaad-1a43-46f4-8122-f2c60f13e5b9.png",
+  "sourceSize": [
+    2172,
+    724
+  ],
+  "sourceSha256": "0ca457f5413f67bb223c06171c19e3c92df023eaa086466e4d9594a05120757c",
+  "processing": "Native alpha preserved, magenta keyed only if alpha missing; fixed cell VFX/attachments, common scale and feet alignment for enemy poses; nearest resize.",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "sourceCrop": [
+        0,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        55,
+        199,
+        606,
+        483
+      ],
+      "sha256": "a4fc67ce9a4cd219d5f3c5ae9ce929ef26366b8657ba401c738577e2a723cf9c"
+    },
+    {
+      "file": "frame-1.png",
+      "sourceCrop": [
+        724,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        22,
+        140,
+        680,
+        542
+      ],
+      "sha256": "7240991c9e54ab44702bba0a5085931e0f0e6dba9208b1015f1334fd680e06b9"
+    },
+    {
+      "file": "frame-2.png",
+      "sourceCrop": [
+        1448,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        1,
+        102,
+        722,
+        580
+      ],
+      "sha256": "278f582742dcf138238e0afea59b739629c25f8ad44a375ce5cd3da48ab489b9"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": "dialog-character-v1",
+  "method": "Built-in imagegen: victory anchor then two identity-reference variants. Native alpha preserved; user-authorized neutral checker cleanup for opaque outputs. Nearest resize and 8px clear margin.",
+  "sources": {
+    "win": "exec-ad96713c-58db-42fe-99b5-87a7cec5a6f6.png",
+    "lose": "exec-25275639-5d32-4e12-afa2-17bffbd30c40.png",
+    "upgrade": "exec-7da3a672-cce8-42d0-86a0-bccfaa7cf2f9.png"
+  },
+  "assets": [
+    {
+      "name": "win",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": true,
+      "sourceBounds": [
+        190,
+        0,
+        1475,
+        886
+      ],
+      "transparentFraction": 0.5121388870176634,
+      "sha256": "394de37751fb4b2d18615ee6847a442676c3cb1bf29c9e4dec494b00fe30574f"
+    },
+    {
+      "name": "lose",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        34,
+        41,
+        1720,
+        823
+      ],
+      "transparentFraction": 0.5430755405970494,
+      "sha256": "996bea9d3ff38fa633c54385dc76eff66f10e1f891b87ee50b1bdf234631ea9d"
+    },
+    {
+      "name": "upgrade",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        219,
+        11,
+        1336,
+        876
+      ],
+      "transparentFraction": 0.580264346968424,
+      "sha256": "e935617ac53dab1a7f12a2630a280e586dabfd47fed6939bc0fbc19914bdb673"
+    }
+  ]
+}

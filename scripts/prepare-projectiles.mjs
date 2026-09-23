@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';import {createRequire} from 'node:module';import {createHash} from 'node:crypto';
+const sharp=createRequire('/Users/yin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json')('sharp');
+const [id,input]=process.argv.slice(2);if(!['spring','mortar','bubble'].includes(id)||!input)throw Error('id input required');
+const raw=await fs.readFile(input),meta=await sharp(raw).metadata();if(!meta.hasAlpha)throw Error('Actual alpha required');
+const out=`public/animation/projectile-v1/${id}`;await fs.mkdir(out,{recursive:true});await fs.mkdir('_production/pixel-r9',{recursive:true});await fs.writeFile(`_production/pixel-r9/${id}-source.png`,raw);
+const frames=[],records=[],cells=[];
+for(let i=0;i<4;i++){const left=Math.round(i%2*meta.width/2),top=Math.round(Math.floor(i/2)*meta.height/2),width=Math.round((i%2+1)*meta.width/2)-left,height=Math.round((Math.floor(i/2)+1)*meta.height/2)-top;
+ const crop=await sharp(raw).extract({left,top,width,height}).png().toBuffer(),alpha=await sharp(crop).ensureAlpha().raw().toBuffer();let x0=width,y0=height,x1=-1,y1=-1,transparent=0;for(let y=0;y<height;y++)for(let x=0;x<width;x++){const a=alpha[(y*width+x)*4+3];if(a===0)transparent++;if(a>16){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}}if(x1<0||transparent<100)throw Error('Missing transparent sprite');cells.push({crop,source:[left,top,width,height],bounds:[x0,y0,x1-x0+1,y1-y0+1]});}
+const scale=40/Math.max(...cells.flatMap(c=>c.bounds.slice(2)));
+for(let i=0;i<cells.length;i++){const c=cells[i],[left,top,width,height]=c.bounds,w=Math.round(width*scale),h=Math.round(height*scale),sprite=await sharp(c.crop).extract({left,top,width,height}).resize(w,h,{kernel:'nearest'}).png().toBuffer();
+ const frame=await sharp({create:{width:64,height:64,channels:4,background:'#00000000'}}).composite([{input:sprite,left:Math.round((64-w)/2),top:Math.round((64-h)/2)}]).png().toBuffer();await fs.writeFile(`${out}/frame-${i}.png`,frame);frames.push(frame);records.push({file:`frame-${i}.png`,crop:c.source,bounds:c.bounds,sha256:createHash('sha256').update(frame).digest('hex')});}
+await sharp({create:{width:128,height:128,channels:4,background:'#00000000'}}).composite(frames.map((input,i)=>({input,left:i%2*64,top:Math.floor(i/2)*64}))).png().toFile(`${out}/sheet.png`);
+await fs.writeFile(`${out}/manifest.json`,JSON.stringify({id,size:[64,64],grid:[2,2],scale,sourceSize:[meta.width,meta.height],sourceSha256:createHash('sha256').update(raw).digest('hex'),method:'Native alpha; equal source cells; all four frames share one nearest scale, recentered to common pivot without per-frame resizing',frames:records},null,2));console.log(id,'prepared');

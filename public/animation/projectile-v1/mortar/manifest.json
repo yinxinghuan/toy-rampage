@@ -1,0 +1,84 @@
+{
+  "id": "mortar",
+  "size": [
+    64,
+    64
+  ],
+  "grid": [
+    2,
+    2
+  ],
+  "scale": 0.12158054711246201,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceSha256": "96d47f3dfd6466b60e5b436789eabbcc9c8323a2cbd1de29f7114fed068437e8",
+  "method": "Native alpha; equal source cells; all four frames share one nearest scale, recentered to common pivot without per-frame resizing",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        180,
+        194,
+        310,
+        329
+      ],
+      "sha256": "918727665e970d92eb93903b5ee4de4270eadf4dd64cfa05502e52a8f4ccaf8b"
+    },
+    {
+      "file": "frame-1.png",
+      "crop": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        132,
+        217,
+        322,
+        319
+      ],
+      "sha256": "9dc68cf6c8c4615dc190760c5738827f5678b09469a4fbd6d80e4a8dcd4cb164"
+    },
+    {
+      "file": "frame-2.png",
+      "crop": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        180,
+        129,
+        314,
+        306
+      ],
+      "sha256": "f921db747ab353c38cd38e1bc408577d09252a2b95f93a30424c98cd76c706eb"
+    },
+    {
+      "file": "frame-3.png",
+      "crop": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        133,
+        128,
+        313,
+        317
+      ],
+      "sha256": "5f48d81a761958bf705a4fa50b7a9b170ecb46240b388dfd93f1604a2498e383"
+    }
+  ]
+}

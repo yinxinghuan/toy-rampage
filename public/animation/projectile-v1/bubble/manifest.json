@@ -1,0 +1,84 @@
+{
+  "id": "bubble",
+  "size": [
+    64,
+    64
+  ],
+  "grid": [
+    2,
+    2
+  ],
+  "scale": 0.12578616352201258,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceSha256": "0d0b217e1eb715fa2dfb6a6b143580867f90479ab8004a94b50242ce5e65f570",
+  "method": "Native alpha; equal source cells; all four frames share one nearest scale, recentered to common pivot without per-frame resizing",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        194,
+        211,
+        318,
+        311
+      ],
+      "sha256": "2a2dd6b1c9b4c842d81d9fecd330b79a10ce3c86c656e467e59476447d74e00b"
+    },
+    {
+      "file": "frame-1.png",
+      "crop": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "bounds": [
+        122,
+        227,
+        313,
+        287
+      ],
+      "sha256": "7001610dd6e2ae3dfdbf7f889e89b9c7bfb7eb60807e6a936c7346f64ece5f52"
+    },
+    {
+      "file": "frame-2.png",
+      "crop": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        194,
+        148,
+        318,
+        300
+      ],
+      "sha256": "451d006dbf52ae41fcebc65fee4cbac53f269ffc80fdfacbda03fd13ea016056"
+    },
+    {
+      "file": "frame-3.png",
+      "crop": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "bounds": [
+        121,
+        148,
+        314,
+        309
+      ],
+      "sha256": "7b3ef9344fa842526938773d04c32dc667a3427379ac54440711d8f8c03a4c63"
+    }
+  ]
+}

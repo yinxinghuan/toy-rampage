@@ -1,0 +1,9 @@
+{
+  "version": "r10-material-audio-v2",
+  "source": "Original procedural sound design in src/pixel/battle-audio.js",
+  "render": "tests/battle-audio-render.mjs via the same Web Audio bank used in combat",
+  "format": "WAV PCM16 mono 48000 Hz, one second per audition",
+  "files": ["spring.wav", "rail.wav", "mortar.wav", "bubble.wav", "drum.wav", "fusion.wav", "upgrade.wav"],
+  "timing": "Launch at 50 ms; spring/mortar/bubble contact at 270 ms. Runtime contact follows projectile flight.",
+  "license": "Project-created assets; no external recordings or sample libraries. No public remix license is granted by this manifest."
+}

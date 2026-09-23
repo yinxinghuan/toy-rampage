@@ -1,0 +1,153 @@
+{
+  "version": "idle-v1",
+  "assets": [
+    {
+      "kind": "rail",
+      "source": "exec-3c5eadac-939e-4b06-99d1-e120a58beb30.png",
+      "origins": [
+        [
+          154,
+          223
+        ],
+        [
+          922,
+          223
+        ],
+        [
+          154,
+          680
+        ],
+        [
+          922,
+          680
+        ]
+      ],
+      "size": [
+        460,
+        150
+      ],
+      "frameSize": [
+        64,
+        64
+      ],
+      "sheetSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "alpha": "original generated RGBA",
+      "registration": "fixed manually reviewed source cells; equal transform, no per-frame bounding box"
+    },
+    {
+      "kind": "bubble",
+      "source": "exec-e30fd24f-4482-45b3-bd56-e6844b56c020.png",
+      "origins": [
+        [
+          290,
+          260
+        ],
+        [
+          905,
+          260
+        ],
+        [
+          290,
+          750
+        ],
+        [
+          905,
+          750
+        ]
+      ],
+      "size": [
+        220,
+        250
+      ],
+      "frameSize": [
+        64,
+        64
+      ],
+      "sheetSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "alpha": "original generated RGBA",
+      "registration": "fixed manually reviewed source cells; equal transform, no per-frame bounding box"
+    },
+    {
+      "kind": "mortar",
+      "source": "exec-b429a964-991e-4557-8cee-de4dde9990e1.png",
+      "origins": [
+        [
+          264,
+          132
+        ],
+        [
+          1032,
+          132
+        ],
+        [
+          264,
+          644
+        ],
+        [
+          1032,
+          644
+        ]
+      ],
+      "size": [
+        240,
+        270
+      ],
+      "frameSize": [
+        64,
+        64
+      ],
+      "sheetSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "alpha": "original generated RGBA",
+      "registration": "fixed manually reviewed source cells; equal transform, no per-frame bounding box"
+    },
+    {
+      "kind": "fusion",
+      "source": "exec-924527a5-9a47-48a1-b92e-82896c0e0b32.png",
+      "origins": [
+        [
+          294,
+          180
+        ],
+        [
+          734,
+          180
+        ],
+        [
+          294,
+          740
+        ],
+        [
+          734,
+          740
+        ]
+      ],
+      "size": [
+        180,
+        370
+      ],
+      "frameSize": [
+        64,
+        64
+      ],
+      "sheetSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "alpha": "original generated RGBA",
+      "registration": "fixed manually reviewed source cells; equal transform, no per-frame bounding box"
+    }
+  ]
+}

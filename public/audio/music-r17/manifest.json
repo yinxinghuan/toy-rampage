@@ -1,0 +1,193 @@
+{
+  "status": "audition-only; not game runtime music",
+  "source": "AlterU Media Service public audio API",
+  "assets": [
+    {
+      "id": "workshop",
+      "name": [
+        "夜班工坊",
+        "Night workshop"
+      ],
+      "file": "workshop.mp3",
+      "task_id": "mt_ca2528f56d93da25e3d9f14e668e9bf3",
+      "request_id": "5dc5b5b4-5504-466f-8a46-a213c0f198bb",
+      "requestedDuration": 32,
+      "actualContainerDuration": 32,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -24,
+      "measuredLUFS": -24.73,
+      "truePeakDbTP": -10.17,
+      "rawLUFS": -21.1,
+      "rawTruePeak": -7.95,
+      "rawOverZero": false,
+      "silenceLog": [
+        "size=N/A time=00:00:06.10 bitrate=N/A speed=12.2x elapsed=0:00:00.50    \r[silencedetect @ 0x7fc9caf16900] silence_start: 15.70524",
+        "[silencedetect @ 0x7fc9caf16900] silence_end: 15.806927 | silence_duration: 0.101688",
+        "size=N/A time=00:00:16.00 bitrate=N/A speed=15.9x elapsed=0:00:01.00    \rsize=N/A time=00:00:26.90 bitrate=N/A speed=17.8x elapsed=0:00:01.51    \r[silencedetect @ 0x7fc9caf16900] silence_start: 31.597224",
+        "[silencedetect @ 0x7fc9caf16900] silence_end: 32 | silence_duration: 0.402776"
+      ],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "patrol",
+      "name": [
+        "轻装巡逻",
+        "Quiet patrol"
+      ],
+      "file": "patrol.mp3",
+      "task_id": "mt_b6b0d6c2b19a619269da0cd63290b9f5",
+      "request_id": "ecbf1c1a-988c-49cb-a505-44ce6484de1c",
+      "requestedDuration": 32,
+      "actualContainerDuration": 32,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -24,
+      "measuredLUFS": -24.43,
+      "truePeakDbTP": -2.56,
+      "rawLUFS": -23.94,
+      "rawTruePeak": -2.07,
+      "rawOverZero": false,
+      "silenceLog": [
+        "[silencedetect @ 0x7faff1404dc0] silence_start: 5.494625",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 5.681682 | silence_duration: 0.187057",
+        "[silencedetect @ 0x7faff1404dc0] silence_start: 11.203839",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 11.407661 | silence_duration: 0.203823",
+        "size=N/A time=00:00:11.50 bitrate=N/A speed=22.7x elapsed=0:00:00.50    \r[silencedetect @ 0x7faff1404dc0] silence_start: 14.082693",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 14.273193 | silence_duration: 0.1905",
+        "[silencedetect @ 0x7faff1404dc0] silence_start: 16.991073",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 17.109526 | silence_duration: 0.118453",
+        "[silencedetect @ 0x7faff1404dc0] silence_start: 19.875755",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 19.984703 | silence_duration: 0.108948",
+        "[silencedetect @ 0x7faff1404dc0] silence_start: 22.688891",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 22.842641 | silence_duration: 0.15375",
+        "size=N/A time=00:00:23.20 bitrate=N/A speed=  23x elapsed=0:00:01.00    \r[silencedetect @ 0x7faff1404dc0] silence_start: 31.264453",
+        "[silencedetect @ 0x7faff1404dc0] silence_end: 32 | silence_duration: 0.735547"
+      ],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "win",
+      "name": [
+        "守住了",
+        "Victory"
+      ],
+      "file": "win.mp3",
+      "task_id": "mt_3cfeb83c54e5d07fd249816f0a0c26ed",
+      "request_id": "9565192b-9d02-46cf-a5f7-82f5daa98dcc",
+      "requestedDuration": 4,
+      "actualContainerDuration": 4,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -20,
+      "measuredLUFS": -20.44,
+      "truePeakDbTP": -7.49,
+      "rawLUFS": -17.02,
+      "rawTruePeak": -4.06,
+      "rawOverZero": false,
+      "silenceLog": [
+        "[silencedetect @ 0x7f8bccf04a40] silence_start: 3.236271",
+        "[silencedetect @ 0x7f8bccf04a40] silence_end: 4 | silence_duration: 0.763729"
+      ],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "lose",
+      "name": [
+        "再装一次",
+        "Try again"
+      ],
+      "file": "lose.mp3",
+      "task_id": "mt_b5b662a9f2ce6dc81b6e54a96bcbcecd",
+      "request_id": "eb00d9d1-9e76-443e-8548-f40e1fda85bb",
+      "requestedDuration": 3,
+      "actualContainerDuration": 3,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -20,
+      "measuredLUFS": -20.03,
+      "truePeakDbTP": -7.84,
+      "rawLUFS": -17.92,
+      "rawTruePeak": -5.33,
+      "rawOverZero": false,
+      "silenceLog": [
+        "[silencedetect @ 0x7fe1a2f15440] silence_start: 1.831432",
+        "[silencedetect @ 0x7fe1a2f15440] silence_end: 3 | silence_duration: 1.168568"
+      ],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "upgrade",
+      "name": [
+        "装配灵感",
+        "Upgrade"
+      ],
+      "file": "upgrade.mp3",
+      "task_id": "mt_5b32bb5a064a6ed7de185dc4705819a5",
+      "request_id": "92ad8cb5-bef7-42bb-acbe-58a16b2a74fb",
+      "requestedDuration": 2.4,
+      "actualContainerDuration": 2.4,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -20,
+      "measuredLUFS": -20.43,
+      "truePeakDbTP": -10.15,
+      "rawLUFS": -24.83,
+      "rawTruePeak": -14.53,
+      "rawOverZero": false,
+      "silenceLog": [],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "pause",
+      "name": [
+        "歇一口气",
+        "A small pause"
+      ],
+      "file": "pause.mp3",
+      "task_id": "mt_4d2db02940453fef71f2cc16b9ae4363",
+      "request_id": "b6ec75b5-5a22-4a05-a89b-6b2ed32dff94",
+      "requestedDuration": 1.2,
+      "actualContainerDuration": 1.2,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -20,
+      "measuredLUFS": -20.54,
+      "truePeakDbTP": -15.04,
+      "rawLUFS": 4.1,
+      "rawTruePeak": 7.92,
+      "rawOverZero": true,
+      "silenceLog": [],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    },
+    {
+      "id": "notice",
+      "name": [
+        "小提示",
+        "Small notice"
+      ],
+      "file": "notice.mp3",
+      "task_id": "mt_287d25ff2fc8ff7b939ff8bf784db303",
+      "request_id": "eb3a504d-0fca-44a5-aa0c-a21fcfbd3614",
+      "requestedDuration": 1.2,
+      "actualContainerDuration": 1.2,
+      "sampleRate": 44100,
+      "channels": 2,
+      "targetLUFS": -20,
+      "measuredLUFS": -20.14,
+      "truePeakDbTP": -12,
+      "rawLUFS": 1.98,
+      "rawTruePeak": 7.75,
+      "rawOverZero": true,
+      "silenceLog": [],
+      "perceptualReview": "pending full human listening; attenuation is not distortion repair",
+      "loopApproved": false
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "source": "src/review/images/pixel.png",
+  "sourceSize": [
+    1024,
+    1536
+  ],
+  "method": "User-requested fine raster slicing; original-color cuts, clean-source cuts, English variants trimmed and resized nearest",
+  "cuts": {
+    "title-zh": [
+      308,
+      0,
+      406,
+      108
+    ],
+    "hud-source": [
+      207,
+      105,
+      613,
+      82
+    ],
+    "tile": [
+      506,
+      541,
+      151,
+      130
+    ],
+    "tile-locked": [
+      202,
+      926,
+      151,
+      118
+    ],
+    "entry": [
+      120,
+      173,
+      123,
+      101
+    ],
+    "exit": [
+      108,
+      1025,
+      130,
+      117
+    ],
+    "land": [
+      675,
+      1166,
+      231,
+      177
+    ],
+    "tray-source": [
+      113,
+      1151,
+      544,
+      190
+    ],
+    "start-zh": [
+      207,
+      1350,
+      443,
+      141
+    ],
+    "refresh-source": [
+      657,
+      1350,
+      195,
+      141
+    ],
+    "pause": [
+      935,
+      12,
+      77,
+      75
+    ],
+    "floor-beam": [
+      173,
+      1138,
+      740,
+      21
+    ],
+    "route-horizontal": [
+      246,
+      211,
+      116,
+      38
+    ],
+    "route-vertical": [
+      837,
+      454,
+      42,
+      138
+    ],
+    "route-corner-top": [
+      828,
+      210,
+      51,
+      59
+    ],
+    "route-corner-bottom": [
+      824,
+      1052,
+      55,
+      56
+    ],
+    "gear": [
+      678,
+      119,
+      43,
+      43
+    ],
+    "heart": [
+      230,
+      120,
+      44,
+      43
+    ]
+  },
+  "cleanSource": "_production/pixel-r3/clean-skin.png",
+  "cleanCuts": {
+    "hud": [
+      207,
+      105,
+      613,
+      82
+    ],
+    "tray": [
+      113,
+      1168,
+      545,
+      176
+    ],
+    "gold-blank": [
+      207,
+      1350,
+      443,
+      141
+    ],
+    "lilac-blank": [
+      657,
+      1350,
+      195,
+      141
+    ],
+    "panel": [
+      319,
+      0,
+      387,
+      107
+    ],
+    "tile-clean": [
+      355,
+      542,
+      150,
+      130
+    ],
+    "route-vertical-clean": [
+      837,
+      270,
+      42,
+      776
+    ],
+    "route-top-clean": [
+      240,
+      211,
+      590,
+      42
+    ],
+    "route-bottom-clean": [
+      237,
+      1065,
+      588,
+      42
+    ],
+    "refresh-label-zh": [
+      699,
+      1373,
+      113,
+      47
+    ],
+    "floor-beam": [
+      173,
+      1138,
+      740,
+      21
+    ],
+    "route-corner-top": [
+      828,
+      210,
+      51,
+      59
+    ],
+    "route-corner-bottom": [
+      824,
+      1052,
+      55,
+      56
+    ]
+  }
+}

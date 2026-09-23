@@ -1,0 +1,59 @@
+{
+  "version": "dialog-cast-v1",
+  "method": "Built-in imagegen: three independent protagonists using the prior illustration as style reference only. Native alpha preserved; user-authorized neutral checker cleanup for opaque outputs. Nearest resize and 8px clear margin.",
+  "sources": {
+    "win": "exec-81d20131-3490-43bb-988e-ae79acc92018.png",
+    "lose": "exec-bc192848-cce5-42bc-a7de-73cfaa3caf5a.png",
+    "upgrade": "exec-e6ab85b9-fbab-464f-ac11-41de3084a3c0.png"
+  },
+  "assets": [
+    {
+      "name": "win",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        203,
+        6,
+        1333,
+        875
+      ],
+      "transparentFraction": 0.6028796254046613,
+      "sha256": "3c91e0464ea1a2c54f8a0838658ac80e5157b3198e5f006d49674a5268210f4b"
+    },
+    {
+      "name": "lose",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        286,
+        23,
+        1248,
+        838
+      ],
+      "transparentFraction": 0.6209173213484517,
+      "sha256": "1b0b18b0be3194deb3de2e25065e4f6ed9ef1645f53abe8df5f6ce69bcb68c7b"
+    },
+    {
+      "name": "upgrade",
+      "size": [
+        720,
+        360
+      ],
+      "sourceHasAlpha": false,
+      "sourceBounds": [
+        281,
+        24,
+        1242,
+        836
+      ],
+      "transparentFraction": 0.5904687398715506,
+      "sha256": "70c21c12cce7101bf8e778692a0b716b339ce8d3e5dc87d30b8aba8ebbbafbc2"
+    }
+  ]
+}

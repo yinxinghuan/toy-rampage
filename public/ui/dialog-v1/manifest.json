@@ -1,0 +1,205 @@
+{
+  "version": "dialog-v1",
+  "method": "Built-in imagegen; native alpha preserved where present. Authorized neutral-checker cleanup, alpha crop and nearest resize.",
+  "sources": {
+    "win": "exec-692411b7-1c65-4911-9142-0999d14886bd.png",
+    "lose": "exec-830e7156-7308-4c97-987a-868e2dd02610.png",
+    "upgrade": "exec-da9bdb3d-c16b-4dcf-9082-3bdfc980376f.png",
+    "panel": "exec-f2885530-4b36-4a37-8c9d-3eab94e78324.png",
+    "titles": "exec-331fedbf-2b5b-4df0-aa3c-c54364d6cc7b.png"
+  },
+  "assets": [
+    {
+      "name": "win",
+      "sourceHasAlpha": false,
+      "size": [
+        720,
+        360
+      ],
+      "sourceBounds": [
+        69,
+        102,
+        1604,
+        721
+      ],
+      "transparentFraction": 0.5485386466826956,
+      "sha256": "c68dc2514902fd897824a80d72f3c70b5cedfb4f28edeb88518b659bd7985297"
+    },
+    {
+      "name": "lose",
+      "sourceHasAlpha": false,
+      "size": [
+        720,
+        360
+      ],
+      "sourceBounds": [
+        59,
+        98,
+        1608,
+        699
+      ],
+      "transparentFraction": 0.6423253998425932,
+      "sha256": "7875a9426a049e2a54a4831340f2ae2372ee3a4f4b796677ac8886cb6529006e"
+    },
+    {
+      "name": "upgrade",
+      "sourceHasAlpha": true,
+      "size": [
+        720,
+        360
+      ],
+      "sourceBounds": [
+        50,
+        18,
+        1810,
+        777
+      ],
+      "transparentFraction": 0.38538709933985527,
+      "sha256": "0b2f872723e1220f665ae586a734edb8ab32c9b30d2d49f187aa142f31029dfc"
+    },
+    {
+      "name": "panel",
+      "sourceHasAlpha": false,
+      "size": [
+        512,
+        512
+      ],
+      "sourceBounds": [
+        21,
+        21,
+        1213,
+        1207
+      ],
+      "transparentFraction": 0.17058077628462923,
+      "sha256": "c2dfc0f867d9ece7d8701e81c1eb64228bab5145d576af530cc70fa75ca6e340"
+    },
+    {
+      "name": "title-win-zh",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        74,
+        38,
+        631,
+        216
+      ],
+      "transparentFraction": 0.4848581949869792,
+      "sha256": "cd14ef51ab4aac214823dc91f3e1dee9750601d772a67a88a0cf844dc99813de"
+    },
+    {
+      "name": "title-win-en",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        22,
+        38,
+        712,
+        201
+      ],
+      "transparentFraction": 0.4351755777994792,
+      "sha256": "53908fd11534b8619c2be9f8a12fa99a34de6f9444f3bfe7b3d714865656398c"
+    },
+    {
+      "name": "title-lose-zh",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        67,
+        22,
+        656,
+        220
+      ],
+      "transparentFraction": 0.4202982584635417,
+      "sha256": "51b42ca5433d9a27d601844640349b39364bf99f4b134904c9be0671eecb6313"
+    },
+    {
+      "name": "title-lose-en",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        51,
+        34,
+        659,
+        203
+      ],
+      "transparentFraction": 0.4618733723958333,
+      "sha256": "5b8a183279879c0a0e51a324548440e391afc031a2fe58e3085f6383ff5aea32"
+    },
+    {
+      "name": "title-upgrade-zh",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        54,
+        20,
+        675,
+        211
+      ],
+      "transparentFraction": 0.4384104410807292,
+      "sha256": "42677e82b0d3dfba8334e92c01b535a19b79857430277ba268635d511e5e9584"
+    },
+    {
+      "name": "title-upgrade-en",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        21,
+        27,
+        720,
+        196
+      ],
+      "transparentFraction": 0.4675445556640625,
+      "sha256": "c5a09af0e94dd9ee4ab729b0a05066b8b643f6f2e0f92aab78023207bee6cc20"
+    },
+    {
+      "name": "title-pause-zh",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        47,
+        4,
+        673,
+        220
+      ],
+      "transparentFraction": 0.4659779866536458,
+      "sha256": "c8a2b2ef99cefb692755c01fdf287307114019c8464870d987d0baf54c026219"
+    },
+    {
+      "name": "title-pause-en",
+      "sourceHasAlpha": false,
+      "size": [
+        640,
+        190
+      ],
+      "sourceBounds": [
+        21,
+        14,
+        716,
+        190
+      ],
+      "transparentFraction": 0.453857421875,
+      "sha256": "3cb2cdad1196bb3570c193edcb5a807e88902d1a0656fb422c73715cf8e73403"
+    }
+  ]
+}

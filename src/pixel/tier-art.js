@@ -1,0 +1,2 @@
+// Structural tier attachments are shared by scene, aiming, compatibility and drag previews.
+export function tierAttachment(kind,rank){if(rank<2||rank>4||!['spring','rail','mortar','bubble','drum'].includes(kind))return '';const src=new URL(`../animation/battle-v1/upgrade/${kind}/frame-${rank-2}.png`,document.baseURI).href;return `<img class="px-tier-attachment" src="${src}" alt="" draggable="false">`;}

@@ -1,0 +1,67 @@
+{
+  "type": "upgrade",
+  "id": "rail",
+  "size": [
+    384,
+    128
+  ],
+  "count": 3,
+  "scale": null,
+  "source": "/Users/yin/.codex/generated_images/01a05c25-1216-7f62-a689-914a82db1253/exec-c8e91a31-9b89-4d82-b846-4a224e640c72.png",
+  "sourceSize": [
+    2172,
+    724
+  ],
+  "sourceSha256": "667c57d357f1556713a6f05b54ca4a8a40895c9945d6b473628708c7bca89785",
+  "processing": "Native alpha preserved, magenta keyed only if alpha missing; fixed cell VFX/attachments, common scale and feet alignment for enemy poses; nearest resize.",
+  "frames": [
+    {
+      "file": "frame-0.png",
+      "sourceCrop": [
+        0,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        12,
+        382,
+        670,
+        138
+      ],
+      "sha256": "fb9048185970903c0c9994b8c5c12f26d2b0964120f34dd56ec04a21fdd91521"
+    },
+    {
+      "file": "frame-1.png",
+      "sourceCrop": [
+        724,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        21,
+        346,
+        682,
+        174
+      ],
+      "sha256": "e39c7c223cd7eff0b1b24bd78424091dff0b324b916257eee5dfb23c98c465a2"
+    },
+    {
+      "file": "frame-2.png",
+      "sourceCrop": [
+        1448,
+        0,
+        724,
+        724
+      ],
+      "opaqueBounds": [
+        12,
+        334,
+        700,
+        186
+      ],
+      "sha256": "77e84a1bbcf4ff8b2db44e95c8620a349e8e746000375e8c7cc235640f1b9176"
+    }
+  ]
+}
