@@ -86,7 +86,7 @@ export function mount(root,model){
  audio=battleAudio({onState:running=>audioSettings.setRunning(running)});music=createMusic({getContext:()=>audio.context,onState:({bed,voices})=>{view.dataset.music=bed||'off';view.dataset.musicVoices=voices;}});
  audioSettings.subscribe((muted,gesture)=>{if(muted)music.setEnabled(false);void audio.setEnabled(!muted,gesture).then(()=>{if(!audioSettings.muted&&gesture)music.setEnabled(true);});});
  bindAudioControls(root);mountAudioButton(root);bindDialogImages(root);rebuild();
- root.querySelector('.tw__watermark').hidden=true;
+ const watermark=root.querySelector('.tw__watermark');if(watermark)watermark.hidden=true;
  root.querySelector('.tw__look').hidden=true;
  root.querySelector('#version').textContent='r50';
  document.documentElement.dataset.digits='jersey10';

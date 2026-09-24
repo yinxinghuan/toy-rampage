@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build && node scripts/compress-build-images.mjs",
+    "build:crazygames": "vite build --mode crazygames && node scripts/compress-build-images.mjs dist-crazygames && node scripts/verify-crazygames.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test tests/grid-depth-r49.test.js tests/save.test.js tests/progression.test.js tests/fusion-contract.test.js tests/engine.test.js tests/rearrange-r40.test.js tests/combat-report.test.js tests/economy-r35.test.js tests/mechanics-r36.test.js tests/campaign.test.js tests/appearance.test.js tests/expansion.test.js tests/aim-math.test.js tests/battle-model.test.js tests/battle-presentation.test.js tests/battle-support.test.js tests/dialog-cast.test.js tests/idle-motion.test.js tests/preload.test.js tests/music-r31.test.js"
+    "test": "node --test tests/crazygames-guest.test.js tests/grid-depth-r49.test.js tests/save.test.js tests/progression.test.js tests/fusion-contract.test.js tests/engine.test.js tests/rearrange-r40.test.js tests/combat-report.test.js tests/economy-r35.test.js tests/mechanics-r36.test.js tests/campaign.test.js tests/appearance.test.js tests/expansion.test.js tests/aim-math.test.js tests/battle-model.test.js tests/battle-presentation.test.js tests/battle-support.test.js tests/dialog-cast.test.js tests/idle-motion.test.js tests/preload.test.js tests/music-r31.test.js"
   },
   "devDependencies": {
     "sharp": "0.35.4",

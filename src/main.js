@@ -9,10 +9,13 @@ import {snapGridAxis} from './grid-input.js';
 import { draw as classicDraw,drawTray as classicTray,drawDrag as classicDrag,setAppearance,getAppearance } from './draw.js';
 import { locale,t,toggleLocale } from './copy.js';
 import * as classicAudio from './audio.js';
-import watermark from './img/alteru.svg';
 async function boot(){
-const pixel=new URLSearchParams(location.search).get('skin')==='classic'?null:await import('./play/skin.js');
+const crazygames=import.meta.env.MODE==='crazygames';
+const pixelPromise=new URLSearchParams(location.search).get('skin')==='classic'?null:import('./play/skin.js');
+const watermarkPromise=crazygames?null:import('./img/alteru.svg');
+const pixel=pixelPromise?await pixelPromise:null;
 if(pixel)await pixel.prepare();
+const watermark=watermarkPromise?(await watermarkPromise).default:'';
 const draw=pixel?.draw||classicDraw,drawTray=pixel?.drawTray||classicTray,drawDrag=pixel?.drawDrag||classicDrag;
 const {enableAudio,toggleSound,sound}=pixel||classicAudio;
 const shapes={fast:'<path d="m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z"/>',plus:'<path d="M12 5v14M5 12h14"/>',pause:'<path d="M8 5v14M16 5v14"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4V5ZM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/>',muted:'<path d="M11 5 6 9H3v6h3l5 4V5ZM16 9l5 6M21 9l-5 6"/>',heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',close:'<path d="m6 6 12 12M6 18 18 6"/>',refresh:'<path d="M3 10a9 9 0 0 1 15-6l3 3M21 3v4h-4M21 14a9 9 0 0 1-15 6l-3-3M3 21v-4h4"/>',gear:'<path d="m9 3-1 3-3 1v3l-2 2 2 2v3l3 1 1 3h6l1-3 3-1v-3l2-2-2-2V7l-3-1-1-3Z"/><circle cx="12" cy="12" r="3"/>'};
@@ -32,7 +35,7 @@ root.innerHTML=`<section class="tw">
 <section class="tw__supply" id="supply"></section>
 <footer class="tw__footer"><button class="tw__primary" id="main-action" data-action="main"></button><button class="tw__refresh" data-action="refresh"></button><button class="tw__icon" data-action="deselect">${icon('close')}</button></footer>
 <div class="tw__xp" hidden><span id="xp-label"></span><div role="progressbar" id="xp-progress"><i></i></div></div>
-<div class="tw__footnote"><span id="version">v0.5.0</span><img class="tw__watermark" src="${watermark}" alt="" draggable="false"></div>
+<div class="tw__footnote"><span id="version">v0.5.0</span>${watermark?`<img class="tw__watermark" src="${watermark}" alt="" draggable="false">`:''}</div>
 <div class="tw__overlay" hidden></div></section>
 <div class="tw__drag" hidden><canvas></canvas></div>
 <div class="tw__guide" aria-hidden="true" hidden><svg class="tw__guide-line"><path/></svg><div class="tw__guide-source"></div><div class="tw__guide-target"></div><div class="tw__guide-hand"><canvas></canvas>${hand}</div></div>`;
