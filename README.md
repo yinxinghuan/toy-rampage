@@ -13,6 +13,8 @@ npm run dev
 
 发布地址：`https://game.aiwaves.tech/03855703-d241-4f8c-90a9-ccf0bb72972e/`。静态镜像：`https://yinxinghuan.github.io/toy-rampage/`。
 
+Crazy Games Basic Launch 使用外链 iframe，不要上传 zip。访客地址（合并并完成 Pages 发布后）：`https://yinxinghuan.github.io/toy-rampage/crazygames/`。根目录镜像已经去掉 AlterU 登录扩展，可直接开玩；`/crazygames/` 是单独的访客包，不显示 AlterU 水印。说明见 [CRAZY_GAMES.md](./CRAZY_GAMES.md)。
+
 第三方字体与完整许可见 [THIRD_PARTY_NOTICES.txt](./public/THIRD_PARTY_NOTICES.txt)。正文像素字体为 TakWolf 的 Fusion Pixel Font 2026.07.20；数字字体 Jersey 10/15 为 The Soft Type Project Authors；这些字体均遵循 SIL OFL 1.1。游戏程序及原创素材由项目作者保留相应权利；公开仓库不自动授予第三方复制、重新发布或商用许可。
 
 [玩法与规则](./doc/requirements.md) · [视觉说明](./doc/visual.md) · [技术说明](./doc/technical.md)
