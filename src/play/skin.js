@@ -4,7 +4,7 @@ import '../pixel/raster.css';
 import '../pixel/battle.css';
 import '../pixel/dialogs.css';
 import './skin.css';
-import {BattleArt,loadBattleArt,BATTLE_ART_TASK_COUNT} from '../pixel/battle-art.js';
+import {BattleArt,loadBattleArt,CORE_ART_TASK_COUNT} from '../pixel/battle-art.js';
 import {EXPERIMENT_SPECS,drawExperiment} from '../pixel/experimental-art.js';
 import {createPreloader} from './preload.js';
 import {createMusic} from './music.js';
@@ -27,10 +27,10 @@ const images={
  tile:new URL('../pixel/images/r3/tile.png',import.meta.url).href,
 };
 const sceneImages={
- environment:new URL('../pixel/images/workshop-environment.png',import.meta.url).href,
- assembly:new URL('../pixel/images/r30/assembly.webp',import.meta.url).href,
- foundry:new URL('../pixel/images/r30/foundry.webp',import.meta.url).href,
- power:new URL('../pixel/images/r30/power.webp',import.meta.url).href,
+ environment:new URL('../pixel/images/entry/environment.webp',import.meta.url).href,
+ assembly:new URL('../pixel/images/entry/assembly.webp',import.meta.url).href,
+ foundry:new URL('../pixel/images/entry/foundry.webp',import.meta.url).href,
+ power:new URL('../pixel/images/entry/power.webp',import.meta.url).href,
  hud:new URL('../pixel/images/r3/hud.png',import.meta.url).href,
  pause:new URL('../pixel/images/r23/pause.png',import.meta.url).href,
  tray:new URL('../pixel/images/r3/tray.png',import.meta.url).href,
@@ -47,29 +47,38 @@ const sceneImages={
  locked:new URL('../pixel/images/r3/tile-locked.png',import.meta.url).href,
  beam:new URL('../pixel/images/r3/floor-beam.png',import.meta.url).href,
 };
-let art,renderer,host,game,audio,music,last=0,signature='',resetNeeded=false;
+let art,renderer,host,game,audio,music,last=0,signature='',resetNeeded=false,backgroundWork,artRevision=0;
+export const assetRevision=()=>artRevision;
+export function startBackground(){const work=backgroundWork;backgroundWork=null;void work?.();}
 const cache=new Map(),effectSeen=new WeakSet();
 const picture=(src,alt='')=>`<img src="${src}" alt="${alt}" draggable="false">`;
 export async function prepare(){
  document.documentElement.classList.add('tw-pixel-page');
  setDialogAssetRoot(new URL('./ui/dialog-v1/',document.baseURI));
  const root=document.querySelector('#app');
- const ui={title:locale==='zh'?images.titleZh:images.titleEn,start:locale==='zh'?images.startZh:images.startEn,tile:images.tile,...(locale==='zh'?{refresh:images.refresh}:{}),...sceneImages};
- const total=BATTLE_ART_TASK_COUNT+Object.keys(ui).length+2;
+ const {assembly,foundry,power,...firstScene}=sceneImages;
+ const ui={title:locale==='zh'?images.titleZh:images.titleEn,start:locale==='zh'?images.startZh:images.startEn,tile:images.tile,...(locale==='zh'?{refresh:images.refresh}:{}),...firstScene};
+ const total=CORE_ART_TASK_COUNT+Object.keys(ui).length;
  while(!art){
   root.innerHTML=`<section class="tw-pixel-loading" role="status"><div class="tw-pixel-loading__brand">${t('loadingTitle')}</div><div class="tw-pixel-loading__panel"><p>${t('loadingWorkshop')}</p><div class="tw-pixel-loading__meter" role="progressbar" aria-label="${t('loadingAssets')}" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="0"><i></i></div><output>0 / ${total}</output><small>${t('loadingAssets')}</small><p class="tw-pixel-loading__hint">${t('loadingHint')}</p></div></section>`;
   const panel=root.querySelector('.tw-pixel-loading'),meter=panel.querySelector('[role=progressbar]');
-  const loader=createPreloader({total,onProgress:({completed})=>{meter.setAttribute('aria-valuenow',completed);meter.firstElementChild.style.width=completed/total*100+'%';panel.querySelector('output').textContent=`${completed} / ${total}`;}});
+  const loader=createPreloader({total,onProgress:({completed})=>{if(!panel.isConnected)return;meter.setAttribute('aria-valuenow',completed);meter.firstElementChild.style.width=completed/total*100+'%';panel.querySelector('output').textContent=`${completed} / ${total}`;}});
   const slow=setTimeout(()=>{panel.querySelector('.tw-pixel-loading__hint').textContent=t('loadingSlow');},10000);
   try{
    const uiReady=Promise.all(Object.entries(ui).map(async([key,url])=>{const image=await loader.image(url);if(key==='title')panel.querySelector('.tw-pixel-loading__brand').innerHTML=picture(url,t('loadingTitle'));return[key,image];}));
-   const fonts=Promise.all([['Jersey 10',jersey],['Workshop Pixel',cjk]].map(([name,url])=>loader.run(async signal=>{const r=await fetch(url,{signal});if(!r.ok)throw Error('Font unavailable');const f=new FontFace(name,await r.arrayBuffer());await f.load();document.fonts.add(f);})));
-   const [loaded,next]=await Promise.all([uiReady,loadBattleArt(new URL('./animation/',document.baseURI),{image:loader.image,readJSON:loader.readJSON,requireIdle:true}),fonts]);
+   const [loaded,next]=await Promise.all([uiReady,loadBattleArt(new URL('./animation/',document.baseURI),{image:loader.image,readJSON:loader.readJSON,progressive:true})]);
    next.tile=Object.fromEntries(loaded).tile;art=next;
+   // The first playable frame precedes optional downloads. No second loading screen.
+   backgroundWork=async()=>{
+    const details=art.loadDetails().then(()=>{cache.clear();artRevision++;});
+    const fonts=Promise.allSettled([['Jersey 10',jersey],['Workshop Pixel',cjk]].map(([name,url])=>loader.run(async signal=>{const r=await fetch(url,{signal});if(!r.ok)throw Error('Font unavailable');const f=new FontFace(name,await r.arrayBuffer());await f.load();document.fonts.add(f);})));
+    await Promise.allSettled([details,fonts,...[assembly,foundry,power].map(url=>loader.image(url))]);
+    loader.cancel();
+   };
   }catch{
    loader.cancel();clearTimeout(slow);panel.setAttribute('role','alert');panel.querySelector('.tw-pixel-loading__panel').innerHTML=`<p>${t('loadingErrorAssets')}</p><button type="button">${t('retryLoading')}</button>`;
    await new Promise(resolve=>panel.querySelector('button').addEventListener('click',resolve,{once:true}));
-  }finally{clearTimeout(slow);loader.cancel();}
+  }finally{clearTimeout(slow);if(!art)loader.cancel();}
  }
 }
 export function mount(root,model){
@@ -132,7 +141,7 @@ export function decorate(mode=''){
  const level=game.levelIndex+1,badge=host.querySelector('.tw-level-badge');
  badge.hidden=game.lab;badge.setAttribute('aria-label',t('levelNumber',{n:level}));badge.querySelector('small').textContent=t('levelShort');badge.querySelector('b').textContent=level;
  const scene=['environment','assembly','foundry','power','foundry','power'][game.levelIndex]||'environment',environment=host.querySelector('.px-game__environment');
- if(environment.dataset.scene!==scene){environment.dataset.scene=scene;environment.style.backgroundImage=`url("${sceneImages[scene]}")`;}
+ if(environment.dataset.scene!==scene){environment.dataset.scene=scene;environment.style.backgroundImage=scene==='environment'?`url("${sceneImages.environment}")`:`url("${sceneImages[scene]}"),url("${sceneImages.environment}")`;}
  const phase=host.querySelector('#phase'),inWaves=!game.lab&&['wave','ready','win','lose'].includes(game.stage);
  phase.classList.toggle('tw-wave-progress',inWaves);
  if(inWaves){const n=game.stage==='ready'?game.wave+1:game.wave;phase.setAttribute('aria-label',t('wave',{n,total:game.waves.length}));phase.innerHTML=`<small aria-hidden="true">${t('waveUnit')}</small><b aria-hidden="true">${n}<em>/</em>${game.waves.length}</b>`;}else phase.removeAttribute('aria-label');

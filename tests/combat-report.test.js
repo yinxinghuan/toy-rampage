@@ -19,9 +19,9 @@ test('wave history deep-copies accounting, next wave and retry clear it',()=>{
  const g=new Workshop();g.reset('run',4);g.startWave();g.combatReport.damage.spring=10;g.recordWave('abandoned');g.combatReport.damage.spring=20;
  assert.equal(g.history[0].combat.damage.spring,10);g.stage='ready';g.startWave();assert.deepEqual(g.combatReport,newCombatReport());g.retry();assert.deepEqual(g.combatReport,newCombatReport());assert.equal(g.history.length,0);
 });
-test('full runs preserve authored results and exact accounted leakage; support is not damage',()=>{
- for(const [level,hp]of [[4,100],[5,60]]){
-  const r=simulate('trial-no-fusion',level);assert.equal(r.hp,hp);
+test('later trial runs keep exact accounted leakage; support is not damage',()=>{
+ for(const [level,hp]of [[4,[100,100,100,60,0]],[5,[100,100,100,40,0]]]){
+  const r=simulate('trial-no-fusion',level);assert.equal(r.stage,'lose');assert.deepEqual(r.history.map(h=>h.hp),hp);
   for(const h of r.history){const v=reportView(h.combat);assert(v);assert.equal(v.leaks.reduce((n,e)=>n+e.count,0),h.leaks);assert(!('drum'in h.combat.damage));assert(v.damage.every(d=>d.percent>=0&&d.percent<=100));}
   assert(r.history.some(h=>h.combat.supportShots>0));
   if(level===4)assert(r.history.some(h=>h.combat.breachExtra>0));else assert(r.history.some(h=>h.combat.chainTargets>0));

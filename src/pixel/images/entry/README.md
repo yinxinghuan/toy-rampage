@@ -1,0 +1,1 @@
+Runtime transport variants of the existing project backgrounds. Generated with sharp.webp({quality:95,effort:6}); source dimensions and composition preserved. Original workshop-environment.png and r30 backgrounds remain unchanged. These variants reduce transfer size, not alter gameplay or asset licensing.
