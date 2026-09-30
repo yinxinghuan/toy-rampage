@@ -47,7 +47,12 @@ function phrase(key) {
 }
 
 const BEST_KEY = 'cg-desktop-best-wave';
+const LAND_SEEN_KEY = 'cg-desktop-land-seen';
+const LAND_NUDGE_MS = 2200;
 let installed = false;
+let landSeenMemory = false;
+let landNudgeKey = '';
+let landNudgeAt = 0;
 
 export function installCrazyGamesGuest() {
   if (installed) return;
@@ -102,27 +107,70 @@ function rememberBest(wave) {
   return next;
 }
 
+function landSeen() {
+  try {
+    if (storage()?.getItem(LAND_SEEN_KEY) === '1') return true;
+  } catch { /* storage is optional */ }
+  return landSeenMemory;
+}
+function markLandSeen() {
+  landSeenMemory = true;
+  try { storage()?.setItem(LAND_SEEN_KEY, '1'); } catch { /* storage is optional */ }
+}
+function betweenWaveLand(game) {
+  return Boolean(game && !game.lab && game.wave >= 1 && game.landRemaining > 0 && game.get?.('land'));
+}
+function landToggle(ctx) {
+  return ctx?.$?.('[data-action="bench-toggle"]') || globalThis.document?.querySelector?.('[data-action="bench-toggle"]') || null;
+}
+function paintLandToggle(game, ctx) {
+  if (ctx?.benchMode === 'land' && game?.wave >= 1 && game.landRemaining > 0 && !game.lab) markLandSeen();
+  const toggle = landToggle(ctx);
+  const show = Boolean(betweenWaveLand(game) && ctx?.benchMode !== 'land' && !landSeen());
+  toggle?.classList?.toggle('cg-land-nudge', show);
+  return { toggle, show };
+}
+function landHand(game, ctx) {
+  const { toggle, show } = paintLandToggle(game, ctx);
+  // The refresh and place lessons keep their own hand. The 2s land hand
+  // starts only once those lessons are finished, so it is not skipped.
+  if (!show || !toggle || game.stage !== 'ready' || ['refresh', 'place'].includes(game.lesson)) return null;
+  const key = `${game.levelIndex}:${game.wave}`;
+  const now = globalThis.performance?.now?.() ?? Date.now();
+  if (landNudgeKey !== key) {
+    landNudgeKey = key;
+    landNudgeAt = now;
+  }
+  return now - landNudgeAt < LAND_NUDGE_MS ? toggle : null;
+}
+
 export function guestGuide(game, ctx) {
   const teaching = ['place', 'second', 'merge', 'expand', 'rail'].includes(game.stage)
     || (game.stage === 'ready' && ['refresh', 'place'].includes(game.lesson));
   globalThis.__cgGuideDelay = teaching || game.stage === 'ready' ? 450 : 3000;
+  const nudge = landHand(game, ctx);
   if (!ctx?.overlayHidden?.() || game.paused || game.choices.length) return undefined;
   if (teaching) return undefined;
   if (game.stage !== 'ready') return undefined;
+  // Land placement keeps the original hand. Weapons stay the default bench.
+  if (ctx.benchMode === 'land') return undefined;
   // One extra free gun before the first wave, then the hand must find Start.
   // Following the hand forever used to place toys and never begin combat.
   if (game.wave === 0 && game.units.length < 3 && ctx.benchMode !== 'land' && ctx.hasBenchMove?.()) return undefined;
+  if (nudge) return { source: nudge, target: nudge, tap: true };
   const start = ctx.$?.('#main-action');
   if (!start || start.disabled || start.style.visibility === 'hidden') return undefined;
   return { source: start, target: start, tap: true };
 }
 
 export function guestHint(game, ctx = {}) {
+  const land = paintLandToggle(game, ctx);
   if (game.paused || game.choices.length || game.ended) return '';
   if (['place', 'second', 'merge', 'expand', 'rail', 'watch'].includes(game.stage)) return '';
   if (game.stage === 'ready' && ['refresh', 'place'].includes(game.lesson)) return '';
   if (game.stage !== 'ready') return '';
   const zh = uiLocale() === 'zh';
+  if (land.show) return zh ? '新地块。点扩格，或空格开战。' : 'New land. Tap Land, or Space.';
   if (game.wave === 0) {
     if (game.units.length < 3 && ctx.benchMode !== 'land') return zh ? '再放一台免费炮，或直接开战' : 'One free gun, or start now';
     return zh ? '按空格，或点开始' : 'Press Space, or tap Start';

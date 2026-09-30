@@ -24,20 +24,46 @@
     aspect-ratio: 1 / 1.71;
     margin: 0;
   }
+  /* 12cqw is ~32px at 800×450. Keep a 44px footer and pull it up only
+     when the portrait frame is shorter than the natural 153cqw offset. */
   .tw-pixel .tw__footer {
-    height: 12cqw;
+    height: 44px;
+    top: min(153cqw, calc(100% - 44px));
   }
   .tw-pixel .tw__footer .tw__primary,
-  .tw-pixel .tw__refresh,
+  .tw-pixel .tw__refresh {
+    height: 44px;
+    min-height: 44px;
+  }
   .tw-pixel .tw__part,
   .tw-pixel .tw__slot {
     min-height: 0;
     min-width: 0;
   }
+  .tw-pixel .tw-bench-toggle {
+    width: 44px;
+    min-width: 44px;
+    height: 48px;
+    min-height: 44px;
+    left: calc(100% + 2px);
+    bottom: 0;
+  }
   .tw-pixel .tw__hint-copy {
     height: auto;
-    max-height: 10cqw;
+    max-height: 16cqw;
   }
+}
+
+.tw-bench-toggle.cg-land-nudge {
+  animation: cg-land-pulse 1s ease-in-out infinite;
+  outline: 2px solid #f3de9a;
+  outline-offset: 1px;
+}
+@keyframes cg-land-pulse {
+  50% { filter: brightness(1.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tw-bench-toggle.cg-land-nudge { animation: none; }
 }
 
 .cg-motive {

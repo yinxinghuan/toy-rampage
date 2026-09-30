@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Workshop, SimulationClock, COLS, LEVELS } from '../src/engine.js';
-import { installCrazyGamesGuest, guestModal } from '../src/crazygames/guest.js';
+import { installCrazyGamesGuest, guestGuide, guestHint, guestModal } from '../src/crazygames/guest.js';
 
 const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
 const vite = readFileSync(new URL('../vite.config.js', import.meta.url), 'utf8');
@@ -76,6 +76,41 @@ test('tutorial line plus the taught refresh survives the first swarm', () => {
   advance(game, clock, 80);
   assert.equal(game.passed >= 3, true);
   assert.equal(game.hp > 0, true);
+});
+
+test('between-wave land is pointed out while weapons stay up', () => {
+  const game = new Workshop();
+  game.stage = 'ready';
+  game.wave = 1;
+  game.lesson = 'refresh';
+  game.landRemaining = 3;
+  const classes = new Set();
+  const toggle = { classList: { toggle(name, on) { on ? classes.add(name) : classes.delete(name); } } };
+  const start = { disabled: false, style: { visibility: 'visible' } };
+  const $ = sel => sel === '[data-action="bench-toggle"]' ? toggle : sel === '#main-action' ? start : null;
+  const ctx = { benchMode: 'weapons', $, overlayHidden: () => true, hasBenchMove: () => false };
+  assert.equal(guestHint(game, ctx), '');
+  assert.equal(classes.has('cg-land-nudge'), true);
+  assert.equal(guestGuide(game, ctx), undefined);
+
+  game.lesson = 'done';
+  assert.match(guestHint(game, ctx), /Tap Land|点扩格/);
+  const realNow = performance.now.bind(performance);
+  let now = realNow();
+  performance.now = () => now;
+  try {
+    assert.equal(guestGuide(game, ctx).target, toggle);
+    now += 2300;
+    assert.equal(guestGuide(game, ctx).target, start);
+    assert.match(guestHint(game, ctx), /Tap Land|点扩格/);
+  } finally {
+    performance.now = realNow;
+  }
+
+  guestGuide(game, { ...ctx, benchMode: 'land' });
+  assert.match(guestHint(game, ctx), /Next:|下一波/);
+  assert.equal(classes.has('cg-land-nudge'), false);
+  assert.equal(guestGuide(game, ctx).target, start);
 });
 
 test('result screens lead with another run', () => {
