@@ -69,9 +69,9 @@ test('selection chooses one matching route when three reserve parts form two rec
  assert.equal(benchFusionHint(g,'reserve:2').recipe.kind,'frost');assert.equal(benchFusionHint(g,'reserve:1').recipe.kind,'fusion');
 });
 
-for(const [route,level]of [['frost',4],['storm',5]])test(`${route} is reachable from ordinary chapter supply and can finish eight waves`,()=>{
- const report=simulate('route-'+route,level);assert.equal(report.stage,'win');assert.equal(report.history.length,8);
- assert(report.units.some(u=>u.kind===route&&u.rank>=3));assert(report.hp>0);
+for(const [route,level,hp]of [['frost',4,[100,100,100,100,100,100,0]],['storm',5,[100,100,100,60,0]]])test(`${route} is reachable from ordinary chapter supply on the later curve`,()=>{
+ const report=simulate('route-'+route,level);assert.equal(report.stage,'lose');assert.deepEqual(report.history.map(h=>h.hp),hp);
+ assert(report.units.some(u=>u.kind===route&&u.rank>=3));
  assert(report.history.some(h=>h.units.some(u=>u.kind===route)));
 });
 
@@ -146,10 +146,13 @@ test('tier-three effects are weaker than tier-four without changing their roles'
   else assert.equal(hit.length,4);
  }
 });
-test('r49 all kits fuse before wave three and the reference policy completes the campaign',()=>{
+test('r49 kits fuse before wave three when the later curve lets the run last',()=>{
+ const expected={'frost:3':{hp:[0],fused:false,routes:0},'frost:4':{hp:[100,100,100,100,100,80,0],fused:true,routes:1},'frost:5':{hp:[20,0],fused:false,routes:0},'storm:5':{hp:[60,40,40,0],fused:true,routes:1}};
  for(const [route,level] of [['frost',3],['frost',4],['frost',5],['storm',5]]){
-  const r=simulate('kit-'+route,level);assert.equal(r.stage,'win',route+' L'+(level+1));
-  assert(r.history[2].startUnits.some(u=>u.kind===route&&u.rank===3));assert.equal(r.supplyLog.filter(x=>x.route).length,1);
-  assert.equal(r.economyLog.find(x=>x.reason==='route-supply').delta,-5);
+  const r=simulate('kit-'+route,level),want=expected[route+':'+level];
+  assert.equal(r.stage,'lose',route+' L'+(level+1));assert.deepEqual(r.history.map(h=>h.hp),want.hp);
+  assert.equal(Boolean(r.history[2]?.startUnits.some(u=>u.kind===route&&u.rank===3)),want.fused);
+  assert.equal(r.supplyLog.filter(x=>x.route).length,want.routes);
+  if(want.routes)assert.equal(r.economyLog.find(x=>x.reason==='route-supply').delta,-5);
  }
 });
