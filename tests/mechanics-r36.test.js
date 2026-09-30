@@ -51,9 +51,11 @@ test('new mechanics are frozen under pause and deterministic across frame rates'
  const g=combat(),e=enemy(g);e.shredLeft=3;g.paused=true;const before=JSON.stringify(g);g.tick(.05);assert.equal(JSON.stringify(g),before);
 });
 
-test('trial chapters have reproducible full-run paths and proper upgrade eligibility',()=>{
- for(const level of [4,5]){
-  const r=simulate('trial',level);assert.equal(r.stage,'win');assert.equal(r.history.length,8);
+test('trial chapters have reproducible paths and proper upgrade eligibility',()=>{
+ const expected=[[4,8,[100,100,100,60,60,60,60,0]],[5,6,[100,100,100,40,20,0]]];
+ for(const [level,waves,hp] of expected){
+  const r=simulate('trial',level);assert.equal(r.stage,'lose');assert.equal(r.history.length,waves);
+  assert.deepEqual(r.history.map(h=>h.hp),hp);
   assert.deepEqual(simulate('trial',level),r);assert(r.units.some(u=>u.kind===(level===4?'rivet':'arc')));
   assert.equal(simulate('idle',level).stage,'lose');
  }
@@ -61,22 +63,25 @@ test('trial chapters have reproducible full-run paths and proper upgrade eligibi
  g.choices=['rivet-duration'];assert(g.chooseUpgrade(0));assert(g.buffs.includes('rivet-duration'));
 });
 
-test('r49 legal entrance expansion supports non-fusion finishes without guaranteeing a fusion advantage',()=>{
- for(const [level,hp]of [[4,100],[5,60]]){
+test('r49 legal entrance expansion still fields the chapter weapon without a fusion',()=>{
+ for(const [level,ordinaryHp,fusionHp] of [[4,[100,100,100,60,0],[100,100,100,60,60,60,60,0]],[5,[100,100,100,40,0],[100,100,100,40,20,0]]]){
   const ordinary=simulate('trial-no-fusion',level),fusion=simulate('trial',level);
-  assert.equal(ordinary.stage,'win');assert.equal(ordinary.hp,hp);
-  assert(!ordinary.units.some(u=>u.kind==='fusion'));assert.equal(ordinary.history.length,8);
-  assert(ordinary.history[4].hp>0);assert(fusion.hp>=ordinary.hp);
+  assert.equal(ordinary.stage,'lose');assert.equal(fusion.stage,'lose');
+  assert.deepEqual(ordinary.history.map(h=>h.hp),ordinaryHp);
+  assert.deepEqual(fusion.history.map(h=>h.hp),fusionHp);
+  assert(!ordinary.units.some(u=>u.kind==='fusion'));
+  assert(fusion.history.length>=ordinary.history.length);
  }
 });
 
-test('r49 larger board supports spread while fusion retains final-wave headroom',()=>{
+test('r49 chapter 6 spread and fusion paths stay reproducible on the later curve',()=>{
  const spread=simulate('trial-spread',5),concentrated=simulate('trial-no-fusion',5),fused=simulate('trial',5);
- assert.equal(spread.stage,'win');assert.equal(spread.hp,60);
- assert.equal(concentrated.hp,60);assert.equal(fused.hp,100);
- assert(spread.history.slice(0,7).every(h=>h.hp===100));
- assert(!spread.units.some(u=>u.kind==='fusion'));assert(spread.units.length>fused.units.length);
+ assert.equal(spread.stage,'lose');assert.deepEqual(spread.history.map(h=>h.hp),[100,60,0]);
+ assert.deepEqual(concentrated.history.map(h=>h.hp),[100,100,100,40,0]);
+ assert.deepEqual(fused.history.map(h=>h.hp),[100,100,100,40,20,0]);
+ assert(!spread.units.some(u=>u.kind==='fusion'));assert(fused.units.some(u=>u.kind==='fusion'));
+ assert(fused.history.length>spread.history.length);
  const g=new Workshop();g.reset('run',5);assert.equal(g.waves[7].gap,.5);
- assert.equal(g.waves[7].count,34);assert.equal(g.waves[7].bossHp,4200);
+ assert.equal(g.waves[7].count,34);assert.equal(g.waves[7].bossHp,10080);
  assert.equal(simulate('idle',5).stage,'lose');
 });

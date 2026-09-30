@@ -31,7 +31,7 @@ Do not upload a zip. Portal metadata still needs the English title **Toy Rampage
 
 ## Desktop session
 
-The guest build keeps the tutorial (place, watch it fire, merge, expand, rail) and does not add ads or Crazy Games SDK calls. Short landscape iframes scale the portrait frame so Start stays on screen, and the Start control stays 44px tall. The teaching hand shows up sooner and, once the opening line is down, points at Start. Level 1’s first swarm and armor wave are a little gentler; later waves and the other levels are unchanged. Between waves the bench stays on weapons. The first time new land is waiting, Land pulses, the hint says to tap it or press Space, and the hand points at Land for a moment before returning to Start. After a loss or a clear, the main button is another run, with the next goal written above it. Level select stays available underneath.
+The guest build keeps the tutorial (place, watch it fire, merge, expand, rail) and does not add ads or Crazy Games SDK calls. Short landscape iframes scale the portrait frame so Start stays on screen, and the Start control stays 44px tall. The teaching hand shows up sooner and, once the opening line is down, points at Start. Level 1’s first swarm and armor wave are a little gentler. From chapter 2’s fifth wave onward, wave HP, mixes, and bosses follow the later curve. Between waves the bench stays on weapons. The first time new land is waiting, Land pulses, the hint says to tap it or press Space, and the hand points at Land for a moment before returning to Start. After a loss or a clear, the main button is another run, with the next goal written above it. Level select stays available underneath.
 
 ## Build locally
 

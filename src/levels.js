@@ -1,4 +1,5 @@
-// Authored playtest curve. No adaptive scaling; all levels share the same economy.
+// Authored opening, then the later r67 curve. No adaptive scaling; all levels share the same economy.
+import {balanceWave} from './difficulty.js';
 export const LEVELS = [
   {id:'first-night',title:'level1',focus:'focus1',waves:[
     {kind:'patrol',count:8,hp:42,speed:43,gap:1.1},
@@ -53,20 +54,21 @@ LEVELS.push(
  ]}
 );
 
-// r42: an authored front guard and runner every six spawns. The opening two
-// waves and boss parameters are unchanged; no player-dependent difficulty.
+// Opening mix: level 1, and chapter 2 waves 1–4. Later waves are replaced below.
+const laterCurve=(levelIndex,waveIndex)=>levelIndex>=2||(levelIndex===1&&waveIndex>=4);
 for(const [levelIndex,level] of LEVELS.entries())for(const [waveIndex,w] of level.waves.entries()){
-  if(levelIndex===1&&waveIndex>=5)w.hp=Math.round(w.hp*.84);
-  if(levelIndex===3&&waveIndex>=5)w.hp=Math.round(w.hp*.76);
-  if(levelIndex<4&&waveIndex>=2&&waveIndex<=4&&w.kind!=='boss'){
+  if(laterCurve(levelIndex,waveIndex))continue;
+  if(waveIndex>=2&&waveIndex<=4&&w.kind!=='boss'){
     const normal={kind:w.kind,hp:w.hp,speed:w.speed,gap:w.gap};
     w.mix=[{kind:'armor',hp:w.hp*3,speed:w.speed*.8,gap:w.gap},normal,normal,{kind:'runner',hp:Math.round(w.hp*.85),speed:Math.max(w.speed,110),gap:w.gap},normal,normal];
   }
 }
 
-// Six-step strategy pass: preserve the two learning waves and the entire late
-// curve. A tougher escort distracts fire while one runner crosses the gap.
-for(const levelIndex of [4,5])for(const waveIndex of [2,3]){
-  const w=LEVELS[levelIndex].waves[waveIndex],normal={kind:w.kind,hp:w.hp,speed:w.speed,gap:w.gap};
-  w.mix=[{kind:levelIndex===4?'plated':'armor',hp:w.hp*3,speed:w.speed*.8,gap:w.gap},normal,normal,{kind:'runner',hp:Math.round(w.hp*.8),speed:110,gap:w.gap},normal,normal];
+// r67 later curve: chapter 2 waves 5–8 and every wave of chapters 3–6.
+// Kind, count, and the authored pace stay on the classic route. HP, mix, and bosses come from the later coefficients.
+for(const [levelIndex,level] of LEVELS.entries())for(const [waveIndex,w] of level.waves.entries()){
+  if(!laterCurve(levelIndex,waveIndex))continue;
+  const identity={kind:w.kind,count:w.count,speed:w.speed,gap:w.gap};
+  if(w.bossSpeed!=null)identity.bossSpeed=w.bossSpeed;
+  level.waves[waveIndex]=balanceWave(identity,levelIndex,waveIndex);
 }

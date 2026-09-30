@@ -1,7 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {Workshop,SimulationClock,LEVELS,WAVES} from '../src/engine.js';
+import {DIFFICULTY} from '../src/difficulty.js';
 import {simulate} from './balance.mjs';
+const round2=n=>Math.round(n*100)/100;
 
 test('authored mixed waves spawn a deterministic sequence without changing boss identity',()=>{
  for(const boss of [false,true]){const g=new Workshop();g.reset('run');g.units=[];g.waves=structuredClone(g.waves);
@@ -18,17 +20,21 @@ test('six authored levels retain opening parameters and advertise deterministic 
   assert.deepEqual(WAVES.slice(0,5).map(w=>[w.count,w.hp,w.speed,w.gap]),[[8,42,43,1.1],[12,42,66,.62],[20,65,49,.3],[11,145,40,.9],[15,100,52,.65]]);
   for(const l of LEVELS){assert.equal(l.waves.length,8);for(const w of l.waves)for(const k of ['count','hp','speed','gap'])assert.ok(w[k]>0);}
   for(const l of LEVELS){assert(!l.waves[0].mix);assert(!l.waves[1].mix);}
-  for(const l of LEVELS.slice(0,4))for(const w of l.waves.slice(2,4)){assert.equal(w.mix.length,6);assert.equal(w.mix[0].kind,'armor');assert.equal(w.mix[0].hp,w.hp*3);assert.equal(w.mix[3].kind,'runner');assert.equal(w.mix[3].speed,110);}
-  for(const [index,l] of LEVELS.slice(4).entries()){
+  for(const l of LEVELS.slice(0,2))for(const w of l.waves.slice(2,4)){assert.equal(w.mix.length,6);assert.equal(w.mix[0].kind,'armor');assert.equal(w.mix[0].hp,w.hp*3);assert.equal(w.mix[3].kind,'runner');assert.equal(w.mix[3].speed,110);}
+  assert(LEVELS[1].waves.slice(4).every(w=>!w.mix));
+  assert.equal(LEVELS[1].waves[4].bossHp,1478);assert.equal(LEVELS[1].waves[7].bossHp,4925);
+  for(const [offset,l] of LEVELS.slice(2).entries()){
+    const chapter=offset+2;
     assert(l.waves.slice(4).every(w=>!w.mix));
     for(const w of l.waves.slice(2,4)){
-      assert.equal(w.mix.length,6);assert.equal(w.mix[0].kind,index===0?'plated':'armor');
-      assert.equal(w.mix[0].hp,w.hp*3);assert.equal(w.mix[0].speed,w.speed*.8);
-      assert.equal(w.mix[3].kind,'runner');assert.equal(w.mix[3].hp,Math.round(w.hp*.8));assert.equal(w.mix[3].speed,110);
-      assert(w.mix.every(e=>e.gap===w.gap));assert.equal(w.mix.filter(e=>e.kind===w.kind&&e.hp===w.hp).length,4);
+      assert.equal(w.mix.length,6);assert.equal(w.mix[0].kind,chapter===4?'plated':'armor');
+      assert.equal(w.mix[0].speed,round2(w.speed*.8));
+      assert.equal(w.mix[3].kind,'runner');assert.equal(w.mix[3].speed,DIFFICULTY.runnerSpeed[chapter]);
+      assert(w.mix.every(e=>e.gap===w.gap));assert.equal(w.mix.filter(e=>e.kind===w.kind&&e.hp===w.hp&&e.speed===w.speed).length,4);
     }
-    assert.deepEqual(l.waves.slice(0,4).map(w=>w.count),[8,10,12,14]);
+    if(chapter>=4)assert.deepEqual(l.waves.slice(0,4).map(w=>w.count),[8,10,12,14]);
   }
+  assert.deepEqual(LEVELS.slice(2).map(l=>l.waves[7].bossHp),[6624,7776,8928,10080]);
 });
 test('render frame partition and speed do not change combat outcomes',()=>{
   const drive=(hz,speed)=>{const g=new Workshop(),clock=new SimulationClock();g.reset('run',3);g.place('reserve:2',1,0);g.place('reserve:1',0,2);g.startWave();for(let i=0;i<hz*40/speed;i++){if(g.choices.length)g.chooseUpgrade(0);clock.advance(g,1/hz,speed);}return g.report();};
@@ -54,12 +60,16 @@ test('wave records preserve before and after builds and exclude preparation time
   const g=new Workshop();g.reset('run');g.tick(.05);g.startWave();const initial=g.lineup();g.units[0].c=3;g.tick(.05);g.recordWave('abandoned');
   assert.deepEqual(g.history[0].startUnits,initial);assert.equal(g.history[0].units[0].c,3);assert.equal(g.history[0].outcome,'abandoned');assert.ok(g.history[0].seconds<=.1);
 });
-test('two different deployment and buff policies can finish all levels; no-deployment controls fail',()=>{
-  for(let level=0;level<4;level++){
+test('two deployment policies finish the opening chapters; the later curve is a measured loss',()=>{
+  for(let level=0;level<3;level++){
     for(const policy of ['blast','mixed']){const r=simulate(policy,level);assert.equal(r.stage,'win',`${level+1} ${policy}`);assert.equal(r.history.length,8);assert.ok(r.hp>0);assert.deepEqual(simulate(policy,level),r);}
     assert.equal(simulate('idle',level).stage,'lose');assert.equal(simulate('empty',level).stage,'lose');
   }
-  assert.deepEqual([0,1,2,3].map(l=>simulate('blast',l).hp),[100,100,100,100]);
-  assert.deepEqual([0,1,2,3].map(l=>simulate('mixed',l).hp),[100,100,100,100]);
-  for(const [l,hp]of [[1,100],[3,100]])assert.equal(simulate('trial-no-fusion',l).hp,hp);
+  assert.deepEqual([0,1,2].map(l=>simulate('blast',l).hp),[100,60,40]);
+  assert.deepEqual([0,1,2].map(l=>simulate('mixed',l).hp),[100,60,100]);
+  for(const policy of ['blast','mixed','trial-no-fusion','idle','empty']){const r=simulate(policy,3);assert.equal(r.stage,'lose',policy);assert.equal(r.hp,0);}
+  assert.deepEqual(simulate('blast',3).history.map(h=>h.hp),[40,0]);
+  assert.deepEqual(simulate('mixed',3).history.map(h=>h.hp),[40,0]);
+  assert.equal(simulate('trial-no-fusion',1).stage,'lose');
+  assert.deepEqual(simulate('trial-no-fusion',1).history.map(h=>h.hp),[100,100,100,100,100,0]);
 });
