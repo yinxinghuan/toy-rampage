@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist-crazygames');
-const BUILD_ID = 'toy-rampage-crazygames-20260924-r51';
+const BUILD_ID = 'toy-rampage-crazygames-20260930-desktop';
 const MAX_INITIAL = 50 * 1024 * 1024;
 const MAX_TOTAL = 250 * 1024 * 1024;
 
