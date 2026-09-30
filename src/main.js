@@ -71,7 +71,7 @@ function updateUI(){
  const unitSig=game.units.map(u=>[u.id,u.kind,u.rank,u.c,u.r].join(':')).join('/');
  const reserveSig=game.reserve.map(u=>u?u.kind+u.rank:'').join(',');
  const boardSig=game.board.map(Number).join('');
- const key=[game.landKind(),routeChoice,game.supplyLog.length,benchMode,pixel?.settled(),boardSig,game.landRemaining,look,game.xp,game.upgradeLevel,game.choices.join(),game.levelIndex,recordIndex,expandedWave,Boolean(drag),game.stage,game.lesson,game.shopRevision,game.rows,game.hp,game.coins,game.wave,game.enemies.length,game.spawnLeft,locale,selection,soundOn,game.paused,confirmMode,speed,game.tray?.kind,reserveSig,unitSig].join('|');
+ const key=[pixel?.assetRevision?.(),game.landKind(),routeChoice,game.supplyLog.length,benchMode,pixel?.settled(),boardSig,game.landRemaining,look,game.xp,game.upgradeLevel,game.choices.join(),game.levelIndex,recordIndex,expandedWave,Boolean(drag),game.stage,game.lesson,game.shopRevision,game.rows,game.hp,game.coins,game.wave,game.enemies.length,game.spawnLeft,locale,selection,soundOn,game.paused,confirmMode,speed,game.tray?.kind,reserveSig,unitSig].join('|');
  if(signature===key)return;signature=key;
  document.documentElement.lang=locale==='zh'?'zh-CN':'en';document.title=t('title');$('.tw').dataset.stage=game.stage;$('.tw').dataset.lesson=game.lesson;$('.tw').dataset.level=String(game.levelIndex+1);
  if(!pixel)$('#title').textContent=t('title');$('#edition').textContent=t('edition');$('#hp-label').textContent=t('health');$('#hp').textContent=game.hp;
@@ -128,7 +128,7 @@ function updateUI(){
    if(focused)cells.querySelector(`[data-cell="${focused}"]`)?.focus({preventScroll:true});
  }
  $('.tw').dataset.look=look;const lookButton=$('.tw__look');lookButton.textContent=t('look-'+look);lookButton.setAttribute('aria-label',t(look==='open'?'switchBlock':'switchOpen'));lookButton.setAttribute('aria-pressed',String(look==='open'));
- const sk=[game.landKind(),benchMode,boardSig,game.landRemaining,look,game.stage,game.shopRevision,locale,game.tray?.kind,game.tray?.rank,reserveSig].join('|');
+ const sk=[pixel?.assetRevision?.(),game.landKind(),benchMode,boardSig,game.landRemaining,look,game.stage,game.shopRevision,locale,game.tray?.kind,game.tray?.rank,reserveSig].join('|');
  if(supplyKey!==sk){
    supplyKey=sk;const supply=$('#supply'),keepToggleFocus=document.activeElement?.dataset?.action==='bench-toggle';
    supply.className='tw__supply';
@@ -458,6 +458,8 @@ function frame(now){
 }
 pixel?.mount(root,game);
 updateUI();requestAnimationFrame(frame);
+// Give the board a paint opportunity before enhancement requests occupy the network.
+requestAnimationFrame(()=>requestAnimationFrame(()=>pixel?.startBackground()));
 if(['invalid','unavailable'].includes(saved.status))notify(saved.status==='invalid'?'saveInvalid':'saveUnavailable');
 }
 boot().catch(error=>{console.error(error);const app=document.querySelector('#app');app.textContent=t('loadingError');});

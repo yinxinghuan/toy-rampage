@@ -1,30 +1,13 @@
-import {WEAPONS,ENEMIES,FOOTPRINT} from './battle-model.js';
+import {FOOTPRINT} from './battle-model.js';
 import {pointAt,center,STATS,COLS,ROWS} from '../engine.js';
 import {bearing,directionFrame,turnToward} from './aim-math.js';
-import {BattlePresentation,PRESENTATION_LAG,PROJECTILES,flightTime,projectilePoint} from './battle-presentation.js';
+import {BattlePresentation,PRESENTATION_LAG,flightTime,projectilePoint} from './battle-presentation.js';
 import {supportLinks} from './battle-support.js';
 import {pick} from './copy.js';
-import {IDLE_DETAIL_KINDS,idlePose,drawIdleDetail} from './idle-motion.js';
+import {idlePose,drawIdleDetail} from './idle-motion.js';
 import {sceneDepth} from './scene-depth.js';
 import {EXPERIMENT_SPECS,drawExperiment} from './experimental-art.js';
-const root=new URL('../animation/',document.baseURI);
-const img=async p=>{const i=new Image();i.src=p;await i.decode();return i;};
-const json=async p=>{const r=await fetch(p);if(!r.ok)throw Error('direction manifest');return r.json();};
-export const BATTLE_ART_TASK_COUNT=WEAPONS.length+ENEMIES.length+WEAPONS.length-3+4*10+8+1+PROJECTILES.length+IDLE_DETAIL_KINDS.length;
-export async function loadBattleArt(assetRoot=root,{image=img,readJSON=json,requireIdle=false}={}){
- const file=p=>new URL(p,assetRoot).href;
- const art={fx:{},enemy:{},upgrade:{},aim:{},static:{},spring:[],drum:null,projectile:{},idle:{},idleMissing:[]};
- await Promise.all([
-  ...WEAPONS.map(async k=>{art.fx[k]=await image(file(`battle-v1/fx/${({rivet:'spring',arc:'rail'})[k]||k}/sheet.png`));}),
-  ...ENEMIES.map(async k=>{art.enemy[k]=await image(file(`battle-v1/enemy/${({plated:'armor',brood:'swarm',mite:'swarm'})[k]||k}/sheet.png`));}),
-  ...WEAPONS.filter(k=>!['fusion','rivet','arc'].includes(k)).map(async k=>{art.upgrade[k]=await image(file(`battle-v1/upgrade/${k}/sheet.png`));}),
-  ...['rail','mortar','bubble','fusion'].map(async k=>{const path=k==='fusion'?'battle-v1/aim/fusion':'aim-v1/'+k;const spec=await readJSON(file(path+'/manifest.json'));art.aim[k]={spec,base:await image(file(path+'/base.png')),heads:await Promise.all(Array.from({length:8},(_,i)=>image(file(path+`/head-${i}.png`))))};}),
-  Promise.all(Array.from({length:8},(_,i)=>image(file(`spring-v1/frame-${i}.png`)))).then(a=>art.spring=a),
-  image(file('battle-v1/motion/drum/sheet.png')).then(a=>art.drum=a),
-  ...PROJECTILES.map(async k=>{art.projectile[k]=await image(file(`projectile-v1/${k==='rivet'?'spring':k==='frost'?'bubble':k}/sheet.png`));}),
-  ...IDLE_DETAIL_KINDS.map(async k=>{try{art.idle[k]=await image(file(`idle-v1/${k}/sheet.png`));}catch(error){if(requireIdle)throw error;art.idleMissing.push(k);}}),
- ]);art.fx.frost=art.fx.bubble;art.fx.storm=art.fx.rail;return art;
-}
+export {loadBattleArt,BATTLE_ART_TASK_COUNT,CORE_ART_TASK_COUNT} from './battle-art-loader.js';
 export const EFFECT_TIME={spring:.2,rail:.24,mortar:.36,bubble:.3,drum:.4,fusion:.42};
 const COLORS={spring:'#ffd374',rail:'#78dfff',mortar:'#ff9679',bubble:'#8fefcb',drum:'#d1a4ff',fusion:'#ffe69b'};
 Object.assign(EFFECT_TIME,{rivet:.2,arc:.3});Object.assign(COLORS,{rivet:'#efbd87',arc:'#d1b8ff'});
