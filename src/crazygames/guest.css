@@ -1,0 +1,68 @@
+/* Guest-only. Injected after the pixel skin so short desktop iframes fit. */
+
+@media (max-height: 560px) {
+  html.tw-pixel-page,
+  html.tw-pixel-page body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .tw-pixel-page #app {
+    height: 100dvh;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+  }
+  /* The shared skin refuses to shrink under 296px, which pushes Start below
+     an 800×450 Crazy Games iframe. Fit the portrait frame to the viewport. */
+  .tw.tw-pixel.px-game {
+    width: min(100vw, calc(100dvh / 1.71));
+    max-width: 100vw;
+    height: auto;
+    max-height: 100dvh;
+    aspect-ratio: 1 / 1.71;
+    margin: 0;
+  }
+  .tw-pixel .tw__footer {
+    height: 12cqw;
+  }
+  .tw-pixel .tw__footer .tw__primary,
+  .tw-pixel .tw__refresh,
+  .tw-pixel .tw__part,
+  .tw-pixel .tw__slot {
+    min-height: 0;
+    min-width: 0;
+  }
+  .tw-pixel .tw__hint-copy {
+    height: auto;
+    max-height: 10cqw;
+  }
+}
+
+.cg-motive {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: left;
+  color: #f3de9a;
+}
+.px-rich-dialog--lose [data-action="levels"],
+.px-rich-dialog--win [data-action="levels"] {
+  grid-column: 1 / -1;
+}
+
+@media (max-height: 520px) {
+  .tw-pixel .tw__modal .px-dialog-hero {
+    max-height: 52px;
+  }
+  .tw-pixel .tw__modal .px-dialog-title {
+    height: 36px;
+    min-height: 36px;
+    font-size: 20px;
+  }
+  .cg-motive {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+}

@@ -29,6 +29,10 @@ https://yinxinghuan.github.io/toy-rampage/crazygames/
 
 Do not upload a zip. Portal metadata still needs the English title **Toy Rampage**, the Chinese title **玩具大暴走**, and the catalog UUID `03855703-d241-4f8c-90a9-ccf0bb72972e`.
 
+## Desktop session
+
+The guest build keeps the tutorial (place, watch it fire, merge, expand, rail) and does not add ads or Crazy Games SDK calls. Short landscape iframes scale the portrait frame so Start stays on screen. The teaching hand shows up sooner and, once the opening line is down, points at Start. Level 1’s first swarm and armor wave are a little gentler; later waves and the other levels are unchanged. After a loss or a clear, the main button is another run, with the next goal written above it. Level select stays available underneath.
+
 ## Build locally
 
 ```bash
